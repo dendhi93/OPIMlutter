@@ -1,5 +1,7 @@
-import 'package:OPIMFlutter/Menus/Login.dart';
+import 'package:OPIMFlutter/Menus/Login/Login.dart';
 import 'package:flutter/material.dart';
+
+import 'Menus/Splash.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,12 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'OPIM',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      home: Splash(),
     );
   }
 }

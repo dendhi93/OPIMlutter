@@ -13,6 +13,7 @@ class _LoginState extends State<Login>{
   TextEditingController etLoginPass = new TextEditingController();
   bool _obscureText = true;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: _initViewLogin(context),);
