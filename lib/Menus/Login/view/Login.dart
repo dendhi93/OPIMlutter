@@ -1,4 +1,7 @@
 
+import 'package:OPIMFlutter/Menus/Login/contract/LoginInterface.dart';
+import 'package:OPIMFlutter/Menus/Login/presenter/LoginPresenter.dart';
+import 'package:OPIMFlutter/Utils/OpimUtils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +10,20 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login>{
+class _LoginState extends State<Login> implements LoginInterfaceView{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController etLoginNik = new TextEditingController();
   TextEditingController etLoginPass = new TextEditingController();
   bool _obscureText = true;
+  OpimUtils _opimUtils = OpimUtils();
+  LoginPresenter _loginPresenter;
 
+  @override
+  void initState() {
+    super.initState();
+    _loginPresenter = LoginPresenter(this);
+    // _loginPresenter.initLogin();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +111,7 @@ class _LoginState extends State<Login>{
                           ),
                           onPressed: () {
                             if (_formKey.currentState.validate()){
-                              // _presenterLogin.validateConn(context,etLoginUsername.text.trim(), etLoginPass.text.trim());
+                               _loginPresenter.validateConn(context,etLoginNik.text.trim(), etLoginPass.text.trim());
                             }
                           },
                           child: Text(
@@ -122,5 +133,24 @@ class _LoginState extends State<Login>{
       _obscureText = !_obscureText;
     });
   }
+
+  @override
+  void goToHome() {
+    // TODO: implement goToHome
+  }
+
+  @override
+  void loadingBar(int typeLoading) {
+  // TODO: implement loadingBar
+  }
+
+  @override
+  void messageLogin(String message) {
+    // TODO: implement messageLogin
+  }
+
+  @override
+  void onAlertDialog(String titleMsg, String titleContent, BuildContext context)
+   => _opimUtils.showNoActionDialog(titleMsg, titleContent, context);
 
 }

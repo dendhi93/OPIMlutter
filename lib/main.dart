@@ -1,4 +1,4 @@
-import 'package:OPIMFlutter/Menus/Login/Login.dart';
+import 'package:OPIMFlutter/Menus/Login/view/Login.dart';
 import 'package:flutter/material.dart';
 
 import 'Menus/Splash.dart';
