@@ -1,6 +1,7 @@
 
 import 'package:OPIMFlutter/Menus/Login/contract/LoginInterface.dart';
 import 'package:OPIMFlutter/Menus/Login/presenter/LoginPresenter.dart';
+import 'package:OPIMFlutter/Utils/ConstantsVar.dart';
 import 'package:OPIMFlutter/Utils/OpimUtils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> implements LoginInterfaceView{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   TextEditingController etLoginNik = new TextEditingController();
   TextEditingController etLoginPass = new TextEditingController();
   bool _obscureText = true;
@@ -141,7 +143,8 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
 
   @override
   void loadingBar(int typeLoading) {
-  // TODO: implement loadingBar
+    typeLoading == ConstantsVar.showLoadingBar ? OpimUtils.showLoadingDialog(context,_keyLoader, ConstantsVar.loadingMessage)
+        : Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
   }
 
   @override
