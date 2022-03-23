@@ -123,6 +123,8 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
                             style: TextStyle(fontSize: 15.0, color: Colors.white),
                           ),
                         ),
+                        new Padding(padding: EdgeInsets.only(top: 30.0)),
+                        new Image.asset('assets/images/ic_bottom.jpeg', width: 120, height: 50,),
                       ],
                   ),
                 ),
