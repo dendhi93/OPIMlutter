@@ -1,6 +1,6 @@
-
-import 'package:OPIMFlutter/Model/entity/MUser.dart';
 import 'package:floor/floor.dart';
+
+import 'entity/MUser.dart';
 
 @dao
 abstract class MUserDao{

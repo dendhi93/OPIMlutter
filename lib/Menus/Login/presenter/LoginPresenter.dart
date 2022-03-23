@@ -1,7 +1,8 @@
-import 'package:OPIMFlutter/Menus/Login/contract/LoginInterface.dart';
-import 'package:OPIMFlutter/Utils/ConstantsVar.dart';
-import 'package:OPIMFlutter/Utils/OpimUtils.dart';
+
 import 'package:flutter/cupertino.dart';
+import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
+import 'package:opim_flutter/Utils/ConstantsVar.dart';
+import 'package:opim_flutter/Utils/OpimUtils.dart';
 
 
 class LoginPresenter implements LoginInterfaceImpl{
@@ -13,12 +14,12 @@ class LoginPresenter implements LoginInterfaceImpl{
 
   @override
   void initLogin() {
-    // TODO: implement initLogin
+    view?.messageLogin("coba");
   }
 
   @override
   void submitLogin(String un, String pwd) {
-    // TODO: implement submitLogin
+    view?.goToHome();
   }
 
   @override

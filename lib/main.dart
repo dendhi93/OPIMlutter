@@ -1,13 +1,13 @@
-import 'package:OPIMFlutter/Menus/Login/view/Login.dart';
+
 import 'package:flutter/material.dart';
 
 import 'Menus/Splash.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(OPIMApp());
 }
 
-class MyApp extends StatelessWidget {
+class OPIMApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

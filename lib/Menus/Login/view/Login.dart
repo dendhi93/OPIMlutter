@@ -1,10 +1,12 @@
 
-import 'package:OPIMFlutter/Menus/Login/contract/LoginInterface.dart';
-import 'package:OPIMFlutter/Menus/Login/presenter/LoginPresenter.dart';
-import 'package:OPIMFlutter/Utils/ConstantsVar.dart';
-import 'package:OPIMFlutter/Utils/OpimUtils.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
+import 'package:opim_flutter/Menus/Login/presenter/LoginPresenter.dart';
+import 'package:opim_flutter/Menus/adapter/BottomNavAdapter.dart';
+import 'package:opim_flutter/Utils/ConstantsVar.dart';
+import 'package:opim_flutter/Utils/OpimUtils.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -24,7 +26,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
   void initState() {
     super.initState();
     _loginPresenter = LoginPresenter(this);
-    // _loginPresenter.initLogin();
+    _loginPresenter.initLogin();
   }
 
   @override
@@ -113,7 +115,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
                           ),
                           onPressed: () {
                             if (_formKey.currentState.validate()){
-                               _loginPresenter.validateConn(context,etLoginNik.text.trim(), etLoginPass.text.trim());
+                                _loginPresenter.validateConn(context,etLoginNik.text.trim(), etLoginPass.text.trim());
                             }
                           },
                           child: Text(
@@ -138,7 +140,10 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
 
   @override
   void goToHome() {
-    // TODO: implement goToHome
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder:
+            (context) => BottomNavAdapter()
+    ));
   }
 
   @override
