@@ -1,13 +1,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
+import 'package:opim_flutter/Model/database/AppDatabase.dart';
 import 'package:opim_flutter/Utils/ConstantsVar.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
-
 
 class LoginPresenter implements LoginInterfaceImpl{
   LoginInterfaceView view;
   LoginPresenter(this.view);
+  final database = $FloorAppDatabase.databaseBuilder('opim_database.db').build();
 
   @override
   void destroyLogin() => view = null;
@@ -19,7 +20,8 @@ class LoginPresenter implements LoginInterfaceImpl{
 
   @override
   void submitLogin(String un, String pwd) {
-    view?.goToHome();
+    //todo validate username
+
   }
 
   @override

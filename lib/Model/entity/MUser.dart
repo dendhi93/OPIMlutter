@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:floor/floor.dart';
 
 
@@ -9,14 +11,14 @@ class MUser{
   final String lastName;
   final String roleName;
   final String roleCode;
-  final DateTime lastLoggedIn;
-  final DateTime registrationDate;
+  final String lastLoggedIn;
+  final String registrationDate;
   final String popid;
   final String pop;
   final String division;
   final String imei;
-  final DateTime lastUpload;
-  final DateTime lastSync;
+  final String lastUpload;
+  final String lastSync;
   final bool isLoggedIn;
   final String userToken;
   final String companyCode;

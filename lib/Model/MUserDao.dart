@@ -5,9 +5,8 @@ import 'entity/MUser.dart';
 @dao
 abstract class MUserDao{
   @insert
-  Future<MUser> insertUser(MUser user);
+  Future<void> insertUser(MUser user);
 
-  @Query('SELECT * FROM User')
-  Future<List<MUser>> getUser();
-
+  // @Query('SELECT * FROM User')
+  // Future<List<MUser>> getUser();
 }
