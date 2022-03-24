@@ -1,6 +1,7 @@
 import 'package:floor/floor.dart';
 
-import 'entity/MUser.dart';
+import 'database/entity/MUser.dart';
+
 
 @dao
 abstract class MUserDao{

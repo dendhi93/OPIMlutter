@@ -127,10 +127,6 @@ class _$MUserDao extends MUserDao {
 
   final InsertionAdapter<MUser> _mUserInsertionAdapter;
 
-  @override
-  Future<void> insertUser(MUser user) async {
-    await _mUserInsertionAdapter.insert(user, OnConflictStrategy.abort);
-  }
 
   @override
   Stream<List<MUser>> fetchStreamDataUser() {
@@ -144,6 +140,11 @@ class _$MUserDao extends MUserDao {
 
   @override
   Future<int> getMaxUser() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> insertUser(user) {
     throw UnimplementedError();
   }
 }

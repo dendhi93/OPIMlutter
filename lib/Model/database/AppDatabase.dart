@@ -3,9 +3,9 @@ import 'dart:async';
 
 import 'package:floor/floor.dart';
 import 'package:opim_flutter/Model/MUserDao.dart';
-import 'package:opim_flutter/Model/entity/MUser.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:path/path.dart';
+import 'entity/MUser.dart';
 
 part "AppDatabase.g.dart";
 

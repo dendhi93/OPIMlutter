@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
 import 'package:opim_flutter/Model/MUserDao.dart';
 import 'package:opim_flutter/Model/database/AppDatabase.dart';
-import 'package:opim_flutter/Model/entity/MUser.dart';
 import 'package:opim_flutter/Utils/ConstantsVar.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
 
@@ -23,6 +22,7 @@ class LoginPresenter implements LoginInterfaceImpl{
   @override
   void submitLogin(String un, String pwd) {
     //todo request api
+    view?.loadingBar(ConstantsVar.showLoadingBar);
     // database.then((onValueP) {
     //
     //   // onValueP.userDAO.insertUser(MUser("aa"))

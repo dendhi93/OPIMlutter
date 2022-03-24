@@ -7,7 +7,7 @@ class ConstantsVar{
   static String blankStatement = "please fill in the blank";
 
   //message
-  static String loadingMessage = "Please wait wile downloading data";
+  static String loadingMessage = "Please wait while downloading data";
   //code
   static int successCode = 200;
   static int showLoadingBar = 11;
