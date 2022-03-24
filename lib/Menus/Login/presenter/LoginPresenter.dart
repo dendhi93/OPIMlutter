@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
 import 'package:opim_flutter/Model/MUserDao.dart';
 import 'package:opim_flutter/Model/database/AppDatabase.dart';
+import 'package:opim_flutter/Model/entity/MUser.dart';
 import 'package:opim_flutter/Utils/ConstantsVar.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
 
@@ -10,7 +11,6 @@ class LoginPresenter implements LoginInterfaceImpl{
   LoginInterfaceView view;
   LoginPresenter(this.view);
   final database = $FloorAppDatabase.databaseBuilder('opim_database.db').build();
-  MUserDao userDao;
 
   @override
   void destroyLogin() => view = null;
@@ -22,7 +22,11 @@ class LoginPresenter implements LoginInterfaceImpl{
 
   @override
   void submitLogin(String un, String pwd) {
-    //todo validate username
+    //todo request api
+    // database.then((onValueP) {
+    //
+    //   // onValueP.userDAO.insertUser(MUser("aa"))
+    // });
   }
 
   @override
@@ -30,12 +34,5 @@ class LoginPresenter implements LoginInterfaceImpl{
     OpimUtils.checkConnection().then((isConnected) => {
       isConnected ? submitLogin(un, pwd) : view?.onAlertDialog(ConstantsVar.noConnectionTitle, ConstantsVar.noConnectionMessage, context)
     });
-  }
-
-  @override
-  void initDatabase() {
-      database.then((onValueP) {
-        userDao = onValueP.userDAO;
-      });
   }
 }

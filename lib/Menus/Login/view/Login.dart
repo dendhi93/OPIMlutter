@@ -26,7 +26,6 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
   void initState() {
     super.initState();
     _loginPresenter = LoginPresenter(this);
-    _loginPresenter.initDatabase();
     _loginPresenter.initLogin();
   }
 

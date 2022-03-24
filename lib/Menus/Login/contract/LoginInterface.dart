@@ -5,7 +5,6 @@ class LoginInterfaceImpl{
   void destroyLogin(){}
   void initLogin(){}
   void validateConn(BuildContext context,String un, String pwd){}
-  void initDatabase(){}
 }
 
 class LoginInterfaceView{

@@ -12,4 +12,7 @@ abstract class MUserDao{
 
   @Query('SELECT * FROM MUser')
   Future<List<MUser>> findAllUser();
+
+  @Query('SELECT max(id) FROM MUser')
+  Future<int> getMaxUser();
 }

@@ -139,7 +139,11 @@ class _$MUserDao extends MUserDao {
 
   @override
   Future<List<MUser>> findAllUser() {
-    // TODO: implement findAllUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<int> getMaxUser() {
     throw UnimplementedError();
   }
 }
