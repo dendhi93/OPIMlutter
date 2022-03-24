@@ -7,6 +7,9 @@ abstract class MUserDao{
   @insert
   Future<void> insertUser(MUser user);
 
-  // @Query('SELECT * FROM User')
-  // Future<List<MUser>> getUser();
+  @Query('SELECT * FROM MUser order by id desc')
+  Stream<List<MUser>> fetchStreamDataUser();
+
+  @Query('SELECT * FROM MUser')
+  Future<List<MUser>> findAllUser();
 }

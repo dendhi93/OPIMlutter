@@ -26,6 +26,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
   void initState() {
     super.initState();
     _loginPresenter = LoginPresenter(this);
+    _loginPresenter.initDatabase();
     _loginPresenter.initLogin();
   }
 
@@ -155,9 +156,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
   }
 
   @override
-  void messageLogin(String message) {
-    // TODO: implement messageLogin
-  }
+  void messageLogin(String message) => _opimUtils.toastMessage(message);
 
   @override
   void onAlertDialog(String titleMsg, String titleContent, BuildContext context)
