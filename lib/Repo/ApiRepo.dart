@@ -6,7 +6,7 @@ class ApiRepo{
 
   Future<String> getLogin(String un, String pass) async{
     //post using form data
-    print(Uri.parse(ConstantsVar.urlApi+'loginUser.php'));
+    print(Uri.parse(ConstantsVar.urlApi+'authenticate'));
     var map = new Map<String, dynamic>();
     map['username'] = un;
     map['password'] = pass;
@@ -15,14 +15,7 @@ class ApiRepo{
       body: map,
     ).timeout(Duration(seconds: 50));
 
-    // if(responseLogin.statusCode == ConstantsVar.successCode
-    //     || responseLogin.statusCode == ConstantsVar.failedHttp){
-    //   print(responseLogin.body);
-    //   return responseLogin.body;
-    // }else{
-    //   // ErrorResponse _errResponse = ErrorResponse(code: 900,message: "Error login");
-    //   // return _errResponse.errResponseToJson(_errResponse);
-    //   // throw new Exception("Error login");
-    // }
+    print(responseLogin.body);
+    return responseLogin.body;
   }
 }

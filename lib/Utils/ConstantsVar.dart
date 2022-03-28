@@ -9,7 +9,10 @@ class ConstantsVar{
   //message
   static String loadingMessage = "Please wait while downloading data";
   //code
-  static int successCode = 200;
+  static String successStatusCode = "200";
+  static String failedStatusCode = "401";
+  static String errorStatusCode = "500";
+  static String errorStatusMessage = "Internal server error";
   static int showLoadingBar = 11;
   static int hideLoadingBar = 22;
 }
