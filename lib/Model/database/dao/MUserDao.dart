@@ -1,6 +1,6 @@
 import 'package:floor/floor.dart';
 
-import 'database/entity/MUser.dart';
+import '../entity/MUser.dart';
 
 
 @dao
@@ -14,6 +14,6 @@ abstract class MUserDao{
   @Query('SELECT * FROM MUser')
   Future<List<MUser>> findAllUser();
 
-  @Query('SELECT max(id) FROM MUser')
-  Future<int> getMaxUser();
+  @Query('SELECT * FROM MUser  by id desc limit 1')
+  Future<MUser> getMaxUser();
 }

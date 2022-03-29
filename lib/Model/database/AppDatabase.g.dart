@@ -139,12 +139,12 @@ class _$MUserDao extends MUserDao {
   }
 
   @override
-  Future<int> getMaxUser() {
+  Future<void> insertUser(user) {
     throw UnimplementedError();
   }
 
   @override
-  Future<void> insertUser(user) {
+  Future<MUser> getMaxUser() {
     throw UnimplementedError();
   }
 }

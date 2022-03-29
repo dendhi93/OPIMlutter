@@ -2,7 +2,7 @@
 import 'dart:async';
 
 import 'package:floor/floor.dart';
-import 'package:opim_flutter/Model/MUserDao.dart';
+import 'package:opim_flutter/Model/database/dao/MUserDao.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:path/path.dart';
 import 'entity/MUser.dart';
