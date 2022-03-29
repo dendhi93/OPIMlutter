@@ -33,7 +33,7 @@ class LoginPresenter implements LoginInterfaceImpl{
         responseStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
         view?.loadingBar(ConstantsVar.hideLoadingBar),
         if(responseStatus == ConstantsVar.successStatusCode){
-          view?.messageLogin("Sucess")
+           view?.messageLogin("Success")
         }else if(responseStatus == ConstantsVar.failedStatusCode){
           view?.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
         }else if(responseStatus == ConstantsVar.errorStatusCode){

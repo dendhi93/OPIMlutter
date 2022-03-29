@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 class ResponseLoginModel{
   Data data;
   String timestamps;
@@ -93,5 +95,25 @@ class UserProfile {
     roleLevel = json['roleLevel'];
     divisicode = json['divisicode'];
   }
+}
 
+class PostLogin {
+  String username;
+  String password;
+  String imei;
+
+  PostLogin({this.username, this.password, this.imei});
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['username'] = this.username;
+    data['password'] = this.password;
+    data['imei'] = this.imei;
+    return data;
+  }
+
+  String loginToJson(PostLogin data) {
+    final jsonData = data.toJson();
+    return json.encode(jsonData);
+  }
 }
