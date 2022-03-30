@@ -29,6 +29,17 @@ class LoginPresenter implements LoginInterfaceImpl{
   @override
   void initLogin() {
     //todo validate already login
+    database.then((onValueDb) {
+      // onValueDb.userDAO.fetchStreamDataUser()
+      // onValueP.userDAO.getMaxUser().then((onValueMax) => {
+      //   if(onValueMax != null){
+      //     id = onValueMax.id + 1
+      //   }
+      // });
+      // mUser = MUser(id, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
+      // onValueP.userDAO.insertUser(mUser);
+      // view?.goToHome();
+    });
   }
 
   @override
@@ -57,14 +68,14 @@ class LoginPresenter implements LoginInterfaceImpl{
           userToken = ResponseLoginModel.fromJson(jsonDecode(value)).data.token,
           companyCode = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.refCompanycode,
           passwordUser = pwd.trim(),
-          database.then((onValueP) {
-            onValueP.userDAO.getMaxUser().then((onValueMax) => {
+          database.then((onValueDB) {
+            onValueDB.userDAO.getMaxUser().then((onValueMax) => {
                 if(onValueMax != null){
                     id = onValueMax.id + 1
                 }
             });
             mUser = MUser(id, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
-            onValueP.userDAO.insertUser(mUser);
+            onValueDB.userDAO.insertUser(mUser);
             view?.goToHome();
           }),
           // view?.goToHome(),
