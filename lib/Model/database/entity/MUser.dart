@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:floor/floor.dart';
 
@@ -19,7 +18,8 @@ class MUser{
   final String imei;
   final String lastUpload;
   final String lastSync;
-  final bool isLoggedIn;
+  @ignore
+  bool isLoggedIn = false;
   final String userToken;
   final String companyCode;
   final String passwordUser;

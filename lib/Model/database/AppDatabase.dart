@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:floor/floor.dart';
 import 'package:opim_flutter/Model/database/dao/MUserDao.dart';

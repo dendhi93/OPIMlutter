@@ -57,17 +57,17 @@ class LoginPresenter implements LoginInterfaceImpl{
           userToken = ResponseLoginModel.fromJson(jsonDecode(value)).data.token,
           companyCode = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.refCompanycode,
           passwordUser = pwd.trim(),
-          // database.then((onValueP) {
-          //   onValueP.userDAO.getMaxUser().then((onValueMax) => {
-          //       if(onValueMax != null){
-          //           id = onValueMax.id + 1
-          //       }
-          //   });
-          //   mUser = MUser(id, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
-          //   onValueP.userDAO.insertUser(mUser);
-          //   view?.goToHome();
-          // }),
-          view?.goToHome(),
+          database.then((onValueP) {
+            onValueP.userDAO.getMaxUser().then((onValueMax) => {
+                if(onValueMax != null){
+                    id = onValueMax.id + 1
+                }
+            });
+            mUser = MUser(id, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
+            onValueP.userDAO.insertUser(mUser);
+            view?.goToHome();
+          }),
+          // view?.goToHome(),
         }else if(responseStatus == ConstantsVar.failedStatusCode){
           view?.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
         }else if(responseStatus == ConstantsVar.errorStatusCode){

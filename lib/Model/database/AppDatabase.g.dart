@@ -80,7 +80,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `MUser` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `firstName` TEXT, `lastName` TEXT, `roleName` TEXT, `roleCode` TEXT, `lastLoggedIn` TEXT, `registrationDate` TEXT, `popid` TEXT, `pop` TEXT, `division` TEXT, `imei` TEXT, `lastUpload` TEXT, `lastSync` TEXT, `isLoggedIn` INTEGER, `userToken` TEXT, `companyCode` TEXT, `passwordUser` TEXT)');
+            'CREATE TABLE IF NOT EXISTS `MUser` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `firstName` TEXT, `lastName` TEXT, `roleName` TEXT, `roleCode` TEXT, `lastLoggedIn` TEXT, `registrationDate` TEXT, `popid` TEXT, `pop` TEXT, `division` TEXT, `imei` TEXT, `lastUpload` TEXT, `lastSync` TEXT, `userToken` TEXT, `companyCode` TEXT, `passwordUser` TEXT)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -96,7 +96,8 @@ class _$AppDatabase extends AppDatabase {
 
 class _$MUserDao extends MUserDao {
   _$MUserDao(this.database, this.changeListener)
-      : _mUserInsertionAdapter = InsertionAdapter(
+      : _queryAdapter = QueryAdapter(database, changeListener),
+        _mUserInsertionAdapter = InsertionAdapter(
             database,
             'MUser',
             (MUser item) => <String, Object>{
@@ -113,13 +114,33 @@ class _$MUserDao extends MUserDao {
                   'imei': item.imei,
                   'lastUpload': item.lastUpload,
                   'lastSync': item.lastSync,
-                  'isLoggedIn': item.isLoggedIn == null
-                      ? null
-                      : (item.isLoggedIn ? 1 : 0),
                   'userToken': item.userToken,
                   'companyCode': item.companyCode,
                   'passwordUser': item.passwordUser
-                });
+                }, changeListener),
+        _mUserDeletionAdapter = DeletionAdapter(
+                    database,
+                    'MUser',
+                    ['id'],
+                        (MUser item) => <String, dynamic>{
+                          'id': item.id,
+                          'firstName': item.firstName,
+                          'lastName': item.lastName,
+                          'roleName': item.roleName,
+                          'roleCode': item.roleCode,
+                          'lastLoggedIn': item.lastLoggedIn,
+                          'registrationDate': item.registrationDate,
+                          'popid': item.popid,
+                          'pop': item.pop,
+                          'division': item.division,
+                          'imei': item.imei,
+                          'lastUpload': item.lastUpload,
+                          'lastSync': item.lastSync,
+                          'userToken': item.userToken,
+                          'companyCode': item.companyCode,
+                          'passwordUser': item.passwordUser
+                    },
+                    changeListener);
 
   final sqflite.DatabaseExecutor database;
 
@@ -127,24 +148,56 @@ class _$MUserDao extends MUserDao {
 
   final InsertionAdapter<MUser> _mUserInsertionAdapter;
 
+  final QueryAdapter _queryAdapter;
+
+  final DeletionAdapter<MUser> _mUserDeletionAdapter;
+
+  static final _mUserMapper = (Map<String, dynamic> row) => MUser(
+      row['id'] as int,
+      row['firstName'] as String,
+      row['lastName'] as String,
+      row['roleName'] as String,
+      row['roleCode'] as String,
+      row['lastLoggedIn'] as String,
+      row['registrationDate'] as String,
+      row['popid'] as String,
+      row['pop'] as String,
+      row['division'] as String,
+      row['imei'] as String,
+      row['lastUpload'] as String,
+      row['lastSync'] as String,
+      row['isLoggedIn'] as bool,
+      row['userToken'] as String,
+      row['companyCode'] as String,
+      row['passwordUser'] as String
+  );
+
+  @override
+  Future<void> insertUser(MUser user) async {
+    await _mUserInsertionAdapter.insert(user, OnConflictStrategy.abort);
+  }
 
   @override
   Stream<List<MUser>> fetchStreamDataUser() {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<MUser>> findAllUser() {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> insertUser(user) {
-    throw UnimplementedError();
+    return _queryAdapter.queryListStream('SELECT * FROM MUser order by id desc',
+         mapper: _mUserMapper);
   }
 
   @override
   Future<MUser> getMaxUser() {
-    throw UnimplementedError();
+    return _queryAdapter.query('SELECT * FROM MUser order by id desc limit 1',
+        mapper: _mUserMapper);
   }
+
+  @override
+  Future<int> deleteAll(List<MUser> list) {
+    return _mUserDeletionAdapter.deleteListAndReturnChangedRows(list);
+  }
+
+  @override
+  Future<void> updateUserLogIn(int id) async {
+    await _queryAdapter.queryNoReturn('update MUser set isLoggedIn=false where id = ?',
+        arguments: <dynamic>[id]);
+  }
+
 }

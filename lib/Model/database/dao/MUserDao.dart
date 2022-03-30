@@ -11,9 +11,13 @@ abstract class MUserDao{
   @Query('SELECT * FROM MUser order by id desc')
   Stream<List<MUser>> fetchStreamDataUser();
 
-  @Query('SELECT * FROM MUser')
-  Future<List<MUser>> findAllUser();
-
-  @Query('SELECT * FROM MUser  by id desc limit 1')
+  @Query('SELECT * FROM MUser order by id desc limit 1')
   Future<MUser> getMaxUser();
+
+  @delete
+  Future<int> deleteAll(List<MUser> list);
+
+  @Query('update MUser set isLoggedIn=false where id=:id')
+  Future<void> updateUserLogIn(int id);
+
 }
