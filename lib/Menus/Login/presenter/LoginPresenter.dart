@@ -28,12 +28,12 @@ class LoginPresenter implements LoginInterfaceImpl{
 
   @override
   void initLogin() {
-    int sizeQuery = 0;
+    String userToken = "";
     database.then((onValueDb) {
       onValueDb.userDAO.findAllUser().then((onValueQuery) => {
           if(onValueQuery != null){
-            sizeQuery = onValueQuery.length,
-            if(sizeQuery > 0)view?.goToHome(),
+            userToken = onValueQuery[0].userToken,
+             if(userToken != "")view?.goToHome(),
           }
       });
     });
@@ -48,7 +48,6 @@ class LoginPresenter implements LoginInterfaceImpl{
         responseStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
         view?.loadingBar(ConstantsVar.hideLoadingBar),
         if(responseStatus == ConstantsVar.successStatusCode){
-          view?.messageLogin("Success"),
           firstName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.firstname,
           lastName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.lastname,
           roleName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.roledescname,

@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:opim_flutter/Menus/Account/Account.dart';
+import 'package:opim_flutter/Menus/History/History.dart';
+import 'package:opim_flutter/Menus/Home/Home.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
 import 'package:opim_flutter/main.dart';
 
@@ -12,10 +15,31 @@ class _BottomNavAdapterState extends State<BottomNavAdapter>{
   int _selectedIndex = 0;
   DateTime currentBackPressTime;
   OpimUtils _opimUtils = OpimUtils();
+  final Home _home = Home();
+  final History _history = History();
+  final Account _account = Account();
+
+
+  Widget _selectedMenu = Home();
+  Widget _selectedScreen(int intSreen){
+    switch(intSreen){
+      case 0 :
+        return _home;
+        break;
+      case 1 :
+        return _history;
+        break;
+      case 2:
+        return _account;
+        break;
+    }
+    return null;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      _selectedMenu = _selectedScreen(index);
     });
   }
 
@@ -49,15 +73,15 @@ class _BottomNavAdapterState extends State<BottomNavAdapter>{
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
-                  label: 'Beranda',
+                  label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.history),
-                  label: 'Riwayat',
+                  label: 'History',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle_outlined),
-                  label: 'Akun',
+                  label: 'Account',
                 ),
               ],
               selectedItemColor: Colors.amber[800],
@@ -65,6 +89,8 @@ class _BottomNavAdapterState extends State<BottomNavAdapter>{
               onTap: _onItemTapped,
             ),
           ),
+          body: Container(color: Colors.white,
+              child : Center(child: _selectedMenu)),
         ),
     );
   }

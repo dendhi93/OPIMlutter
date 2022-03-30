@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'Login/view/Login.dart';
+import '../Login/view/Login.dart';
 
 class Splash extends StatefulWidget {
   @override

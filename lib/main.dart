@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
-
-import 'Menus/Splash.dart';
+import 'Menus/Splash/Splash.dart';
 
 void main() {
   runApp(OPIMApp());

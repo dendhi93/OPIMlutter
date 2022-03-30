@@ -1,6 +1,3 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
 import 'package:opim_flutter/Menus/Login/presenter/LoginPresenter.dart';
@@ -146,6 +143,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
         MaterialPageRoute(builder:
             (context) => BottomNavAdapter()
     ));
+    _loginPresenter.destroyLogin();
   }
 
   @override
