@@ -20,7 +20,7 @@ class LoginPresenter implements LoginInterfaceImpl{
   String firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId;
   String popName, division, imei, lastUpload, lastSync, userToken, companyCode, passwordUser;
   MUser mUser;
-  int maxId = 0;
+  int maxId = 1;
   DateTime now = DateTime.now();
 
   @override
@@ -28,17 +28,14 @@ class LoginPresenter implements LoginInterfaceImpl{
 
   @override
   void initLogin() {
-    //todo validate already login
+    int sizeQuery = 0;
     database.then((onValueDb) {
-      // onValueDb.userDAO.fetchStreamDataUser()
-      // onValueP.userDAO.getMaxUser().then((onValueMax) => {
-      //   if(onValueMax != null){
-      //     id = onValueMax.id + 1
-      //   }
-      // });
-      // mUser = MUser(id, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
-      // onValueP.userDAO.insertUser(mUser);
-      // view?.goToHome();
+      onValueDb.userDAO.findAllUser().then((onValueQuery) => {
+          if(onValueQuery != null){
+            sizeQuery = onValueQuery.length,
+            if(sizeQuery > 0)view?.goToHome(),
+          }
+      });
     });
   }
 
@@ -46,7 +43,6 @@ class LoginPresenter implements LoginInterfaceImpl{
   void submitLogin(String un, String pwd) {
     //todo request api
     view?.loadingBar(ConstantsVar.showLoadingBar);
-    int id = 1;
     try{
       _apiRepo.getLogin(un.trim(), pwd.trim()).then((value) => {
         responseStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
@@ -71,14 +67,13 @@ class LoginPresenter implements LoginInterfaceImpl{
           database.then((onValueDB) {
             onValueDB.userDAO.getMaxUser().then((onValueMax) => {
                 if(onValueMax != null){
-                    id = onValueMax.id + 1
+                  maxId = onValueMax.id + 1
                 }
             });
-            mUser = MUser(id, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
+            mUser = MUser(maxId, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
             onValueDB.userDAO.insertUser(mUser);
             view?.goToHome();
           }),
-          // view?.goToHome(),
         }else if(responseStatus == ConstantsVar.failedStatusCode){
           view?.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
         }else if(responseStatus == ConstantsVar.errorStatusCode){

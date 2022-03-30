@@ -20,4 +20,7 @@ abstract class MUserDao{
   @Query('update MUser set isLoggedIn=false where id=:id')
   Future<void> updateUserLogIn(int id);
 
+  @Query('SELECT * FROM MUser')
+  Future<List<MUser>> findAllUser();
+
 }

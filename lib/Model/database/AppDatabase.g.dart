@@ -200,4 +200,9 @@ class _$MUserDao extends MUserDao {
         arguments: <dynamic>[id]);
   }
 
+  @override
+  Future<List<MUser>> findAllUser() {
+    return _queryAdapter.queryList('SELECT * FROM MUser', mapper: _mUserMapper);
+  }
+
 }
