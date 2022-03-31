@@ -6,10 +6,20 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account>{
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(body: _initViewAccount(context),);
+  }
 
+  Widget _initViewAccount(BuildContext context){
+    return Form(
+      child: new Column(
+        children: <Widget>[
+          new Padding(padding: EdgeInsets.only(left: 70.0, top: 40.0)),
+          new Text("account",style:TextStyle(fontSize: 18)),
+        ],
+      ),
     );
   }
 }
