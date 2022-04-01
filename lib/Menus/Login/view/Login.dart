@@ -48,7 +48,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
                   child: new Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        isSmallScreen ? new Padding(padding: EdgeInsets.only(top: 0.0))
+                        isSmallScreen ? new Padding(padding: EdgeInsets.only(top: 20.0))
                         : new Padding(padding: EdgeInsets.only(top: 30.0)),
                         new Image.asset('assets/images/opim_launcher.png', width: 190, height: 120,),
                         new Text("OPIM",
