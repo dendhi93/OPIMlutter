@@ -29,16 +29,35 @@ class _HomeState extends State<Home>{
     children: <Widget>[
       Expanded(child: Container(
           color: Colors.green,
-          child: new Row(
-              children: <Widget>[
-                new Column(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Row(
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.only(left: 190.0, top: 40.0)),
-                    Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
-                    Text('Nama', style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                      Expanded(child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                              Container(
+                                padding: const EdgeInsets.only(left: 30.0, top: 40.0),
+                                child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(left: 30.0, top: 7.0),
+                                child: Text('Nama', style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                              ),
+                          ],
+                        ),
+                      ),
                   ],
-                )
-              ],
+                ),
+              ),
+              Expanded(child:
+                  Container(
+                    margin: EdgeInsets.only(top: 0.0, left: 30.0,right: 30.0, bottom: 60.0),
+                    child: Divider(color: Colors.white),
+                  )
+              ),
+            ],
           ),
       ),flex: 3,),
       Expanded(child: Container(color: Colors.transparent),flex: 5,),
@@ -55,7 +74,7 @@ class _HomeState extends State<Home>{
             bottomLeft:  const  Radius.circular(15.0),
             bottomRight: const  Radius.circular(15.0))
     ),
-    child: Center(child: Text('create your content inside this')),
+    child: Center(child: Text('')),
   );
 
 }
