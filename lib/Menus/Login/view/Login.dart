@@ -28,10 +28,15 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _initViewLogin(context),);
+    final double shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool isSmallScreen = shortestSide < 500.0;
+    return Scaffold(body: isSmallScreen ?
+          _initViewLogin(context, true)
+        : _initViewLogin(context, false)
+      ,);
   }
 
-  Widget _initViewLogin(BuildContext context){
+  Widget _initViewLogin(BuildContext context, bool isSmallScreen){
       return Form(
           key: _formKey,
           child: new Container(
@@ -43,6 +48,8 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
                   child: new Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        isSmallScreen ? new Padding(padding: EdgeInsets.only(top: 0.0))
+                        : new Padding(padding: EdgeInsets.only(top: 30.0)),
                         new Image.asset('assets/images/opim_launcher.png', width: 190, height: 120,),
                         new Text("OPIM",
                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
