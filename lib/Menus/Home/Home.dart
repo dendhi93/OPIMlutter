@@ -105,7 +105,7 @@ class _HomeState extends State<Home>{
 
   get content => Container(
     padding: const EdgeInsets.all(12.0),
-    margin: EdgeInsets.only(top: 120.0, left: 25.0,right: 25.0, bottom: 160.0),
+    margin: EdgeInsets.only(top: 120.0, left: 25.0,right: 25.0, bottom: 183.0),
     decoration: new BoxDecoration(
         color: HexColor("#F0F8FF"),
         borderRadius: new BorderRadius.only(
@@ -130,9 +130,205 @@ class _HomeState extends State<Home>{
             children: <Widget>[
               Text('Informasi', style:TextStyle(fontSize: 18, color: Colors.black)),
               Text('Informasi terbaru untukmu ada disini', style:TextStyle(fontSize: 15, color: Colors.black)),
+              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              listRestan,
+              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              listLastLogin,
+              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              listLastUploaded,
+              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              listLastSync
             ],
           ),
         )
+    ),
+  );
+
+  get listRestan => Container(
+    padding: const EdgeInsets.all(12.0),
+    decoration: new BoxDecoration(
+      color: HexColor("#FDEEEE"),
+      borderRadius: new BorderRadius.only(
+          topLeft:  const  Radius.circular(15.0),
+          topRight: const  Radius.circular(15.0),
+          bottomLeft:  const  Radius.circular(15.0),
+          bottomRight: const  Radius.circular(15.0)
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey,
+          blurRadius: 1,
+          offset: Offset(2, 3),
+        )
+      ],
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Expanded(child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Detail Restan', style:TextStyle(fontSize: 15, color: Colors.black)),
+            Row(
+              children: [
+                Icon(
+                  Icons.circle_notifications,
+                  color: Colors.grey,
+                ),
+                new Padding(padding: EdgeInsets.only(right: 10.0)),
+                Text('TPH belum di cek')
+              ],
+            )
+          ],
+        )
+        ),
+        Icon(
+          Icons.circle_notifications,
+          color: Colors.grey.withOpacity(0.9),
+          size: 32,
+        ),
+      ],
+    ),
+  );
+
+  get listLastLogin => Container(
+    padding: const EdgeInsets.all(8.0),
+    decoration: new BoxDecoration(
+      color: HexColor("#FDF7E5"),
+      borderRadius: new BorderRadius.only(
+          topLeft:  const  Radius.circular(15.0),
+          topRight: const  Radius.circular(15.0),
+          bottomLeft:  const  Radius.circular(15.0),
+          bottomRight: const  Radius.circular(15.0)
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey,
+          blurRadius: 1,
+          offset: Offset(2, 3),
+        )
+      ],
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Expanded(child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Last Login', style:TextStyle(fontSize: 15, color: Colors.black)),
+            Row(
+              children: [
+                Icon(
+                  Icons.account_circle_outlined,
+                  color: Colors.grey,
+                ),
+                new Padding(padding: EdgeInsets.only(right: 10.0)),
+                Text('dd/mm/yyyy')
+              ],
+            )
+          ],
+        )
+        ),
+        Icon(
+          Icons.account_circle_outlined,
+          color: Colors.grey.withOpacity(0.9),
+          size: 32,
+        ),
+      ],
+    ),
+  );
+
+  get listLastUploaded => Container(
+    padding: const EdgeInsets.all(8.0),
+    decoration: new BoxDecoration(
+      color: HexColor("#FDF7E5"),
+      borderRadius: new BorderRadius.only(
+          topLeft:  const  Radius.circular(15.0),
+          topRight: const  Radius.circular(15.0),
+          bottomLeft:  const  Radius.circular(15.0),
+          bottomRight: const  Radius.circular(15.0)
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey,
+          blurRadius: 1,
+          offset: Offset(2, 3),
+        )
+      ],
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Expanded(child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Last Uploaded', style:TextStyle(fontSize: 15, color: Colors.black)),
+            Row(
+              children: [
+                Icon(
+                  Icons.arrow_circle_up_outlined,
+                  color: Colors.grey,
+                ),
+                new Padding(padding: EdgeInsets.only(right: 10.0)),
+                Text('dd/mm/yyyy')
+              ],
+            )
+          ],
+        )
+        ),
+        Icon(
+          Icons.arrow_circle_up_outlined,
+          color: Colors.grey.withOpacity(0.9),
+          size: 32,
+        ),
+      ],
+    ),
+  );
+
+  get listLastSync => Container(
+    padding: const EdgeInsets.all(8.0),
+    decoration: new BoxDecoration(
+      color: HexColor("#FDF7E5"),
+      borderRadius: new BorderRadius.only(
+          topLeft:  const  Radius.circular(15.0),
+          topRight: const  Radius.circular(15.0),
+          bottomLeft:  const  Radius.circular(15.0),
+          bottomRight: const  Radius.circular(15.0)
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey,
+          blurRadius: 1,
+          offset: Offset(2, 3),
+        )
+      ],
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Expanded(child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Last Synchronization', style:TextStyle(fontSize: 15, color: Colors.black)),
+            Row(
+              children: [
+                Icon(
+                  Icons.sync,
+                  color: Colors.grey,
+                ),
+                new Padding(padding: EdgeInsets.only(right: 10.0)),
+                Text('dd/mm/yyyy')
+              ],
+            )
+          ],
+        )
+        ),
+        Icon(
+          Icons.sync,
+          color: Colors.grey.withOpacity(0.9),
+          size: 32,
+        ),
+      ],
     ),
   );
 
