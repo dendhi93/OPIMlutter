@@ -7,7 +7,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home>{
+  String nameUser = "";
+  String popUser = "";
 
+  @override
+  void initState() {
+    super.initState();
+    nameUser = "Budi";
+    popUser = "TSE - A";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,24 +46,54 @@ class _HomeState extends State<Home>{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                               Container(
-                                padding: const EdgeInsets.only(left: 30.0, top: 40.0),
+                                padding: const EdgeInsets.only(left: 25.0, top: 40.0),
                                 child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
                               ),
                               Container(
-                                padding: const EdgeInsets.only(left: 30.0, top: 7.0),
-                                child: Text('Nama', style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                                padding: const EdgeInsets.only(left: 25.0, top: 7.0),
+                                child: Text(nameUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
                               ),
                           ],
                         ),
                       ),
+                    Expanded(child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 17.0),
+                            child: Icon(
+                                Icons.shopping_bag,
+                                color: Colors.white,
+                                size: 45,
+                              ),
+                            ),
+                          new Padding(padding: EdgeInsets.only(right: 10.0)),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                padding: const EdgeInsets.only(right: 25.0, top: 40.0),
+                                child: Text('POP', style:TextStyle(fontSize: 18, color: Colors.white)),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(right: 25.0, top: 7.0),
+                                child: Text(popUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ),
                   ],
                 ),
               ),
-              Expanded(child:
+
                   Container(
-                    margin: EdgeInsets.only(top: 0.0, left: 30.0,right: 30.0, bottom: 60.0),
-                    child: Divider(color: Colors.white),
-                  )
+                    margin: EdgeInsets.only(top: 0.0, left: 25.0,right: 25.0, bottom: 127.0),
+                    child: Divider(
+                        color: Colors.white,
+                        height: 2
+                    ),
               ),
             ],
           ),
@@ -65,14 +103,22 @@ class _HomeState extends State<Home>{
   );
 
   get content => Container(
-    margin: EdgeInsets.only(top: 125.0, left: 30.0,right: 30.0, bottom: 170.0),
+    margin: EdgeInsets.only(top: 120.0, left: 25.0,right: 25.0, bottom: 160.0),
     decoration: new BoxDecoration(
-        color: HexColor("#E5E4E2"),
+        color: HexColor("#F0F8FF"),
         borderRadius: new BorderRadius.only(
             topLeft:  const  Radius.circular(15.0),
             topRight: const  Radius.circular(15.0),
             bottomLeft:  const  Radius.circular(15.0),
-            bottomRight: const  Radius.circular(15.0))
+            bottomRight: const  Radius.circular(15.0)
+        ),
+      boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 1,
+            offset: Offset(2, 3),
+          )
+      ],
     ),
     child: Center(child: Text('')),
   );
