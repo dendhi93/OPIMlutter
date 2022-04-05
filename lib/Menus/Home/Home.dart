@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -103,6 +104,7 @@ class _HomeState extends State<Home>{
   );
 
   get content => Container(
+    padding: const EdgeInsets.all(12.0),
     margin: EdgeInsets.only(top: 120.0, left: 25.0,right: 25.0, bottom: 160.0),
     decoration: new BoxDecoration(
         color: HexColor("#F0F8FF"),
@@ -120,7 +122,18 @@ class _HomeState extends State<Home>{
           )
       ],
     ),
-    child: Center(child: Text('')),
+    child: Center(
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Informasi', style:TextStyle(fontSize: 18, color: Colors.black)),
+              Text('Informasi terbaru untukmu ada disini', style:TextStyle(fontSize: 15, color: Colors.black)),
+            ],
+          ),
+        )
+    ),
   );
 
 }
