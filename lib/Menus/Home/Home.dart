@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -10,12 +10,20 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home>{
   String nameUser = "";
   String popUser = "";
+  String qtyTph = "";
+  final menus = [
+    ["assets/images/ic_panen.png", "Cek Hasil Panen"],
+    ["assets/images/ic_restan.png", "Cek Restan"],
+    ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
+    ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
+  ];
 
   @override
   void initState() {
     super.initState();
     nameUser = "Budi";
     popUser = "TSE - A";
+    qtyTph = "5 TPH belum di cek";
   }
 
   @override
@@ -91,15 +99,46 @@ class _HomeState extends State<Home>{
 
                   Container(
                     margin: EdgeInsets.only(top: 0.0, left: 25.0,right: 25.0, bottom: 127.0),
-                    child: Divider(
-                        color: Colors.white,
-                        height: 2
-                    ),
+                    child: Divider(color: Colors.white, height: 2),
               ),
             ],
           ),
       ),flex: 3,),
-      Expanded(child: Container(color: Colors.transparent),flex: 5,),
+      Expanded(child: Container(
+          margin: EdgeInsets.only(left: 30.0,right: 30.0, bottom: 5.0),
+          alignment: Alignment.centerLeft,
+          color: Colors.transparent,
+          child: Column(
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 230.0)),
+              Text('Pilih Menu', style:TextStyle(fontSize: 18, color: Colors.black)),
+              Padding(padding: EdgeInsets.only(top: 5.0)),
+              Expanded(child:
+                    Container(child:
+                        GridView.count(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 2.0,
+                          mainAxisSpacing: 4.0,
+                          children: [
+                            ...menus.map((i) => Card(
+                              color:  HexColor("#32CD32"),
+                              child: Center(child: Column(
+                                children: <Widget>[
+                                  Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
+                                  Text(i.last, style:TextStyle(fontSize: 13, color: Colors.black)),
+                                ],
+                              ),
+                              ),
+                            ))
+                          ],
+                        ),
+                    ),flex:1,
+              ),
+            ],
+          ),
+      ),flex: 5,),
     ],
   );
 
@@ -176,7 +215,7 @@ class _HomeState extends State<Home>{
                   color: Colors.grey,
                 ),
                 new Padding(padding: EdgeInsets.only(right: 10.0)),
-                Text('TPH belum di cek')
+                Text(qtyTph)
               ],
             )
           ],
@@ -333,3 +372,4 @@ class _HomeState extends State<Home>{
   );
 
 }
+
