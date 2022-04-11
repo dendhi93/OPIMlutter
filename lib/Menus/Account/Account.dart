@@ -13,13 +13,23 @@ class _AccountState extends State<Account>{
   }
 
   Widget _initViewAccount(BuildContext context){
-    return Form(
-      child: new Column(
-        children: <Widget>[
-          new Padding(padding: EdgeInsets.only(left: 70.0, top: 40.0)),
-          new Text("account",style:TextStyle(fontSize: 18)),
-        ],
-      ),
+    return Stack(
+      children: <Widget>[dashAccount, content],
     );
   }
+
+  get dashAccount => Column(
+      children: <Widget>[
+        Expanded(child: Container(
+          color: Colors.green,
+        ),flex: 3,),
+        Expanded(child: Container(
+          color: Colors.white,
+        ),flex: 4,),
+      ],
+  );
+
+  get content => Container(
+
+  );
 }
