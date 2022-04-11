@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:opim_flutter/Utils/OpimUtils.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,12 +12,8 @@ class _HomeState extends State<Home>{
   String nameUser = "";
   String popUser = "";
   String qtyTph = "";
-  final menus = [
-    ["assets/images/ic_panen.png", "Cek Hasil Panen"],
-    ["assets/images/ic_restan.png", "Cek Restan"],
-    ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
-    ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
-  ];
+  List menus = [];
+  OpimUtils _opimUtils = OpimUtils();
 
   @override
   void initState() {
@@ -24,6 +21,12 @@ class _HomeState extends State<Home>{
     nameUser = "Budi";
     popUser = "TSE - A";
     qtyTph = "5 TPH belum di cek";
+    menus = [
+        ["assets/images/ic_panen.png", "Cek Hasil Panen"],
+        ["assets/images/ic_restan.png", "Cek Restan"],
+        ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
+        ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
+      ];
   }
 
   @override
@@ -109,6 +112,7 @@ class _HomeState extends State<Home>{
           alignment: Alignment.centerLeft,
           color: Colors.transparent,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(padding: EdgeInsets.only(top: 230.0)),
               Text('Pilih Menu', style:TextStyle(fontSize: 18, color: Colors.black)),
@@ -122,16 +126,36 @@ class _HomeState extends State<Home>{
                           crossAxisSpacing: 2.0,
                           mainAxisSpacing: 4.0,
                           children: [
-                            ...menus.map((i) => Card(
-                              color:  HexColor("#32CD32"),
-                              child: Center(child: Column(
-                                children: <Widget>[
-                                  Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
-                                  Text(i.last, style:TextStyle(fontSize: 13, color: Colors.black)),
-                                ],
-                              ),
-                              ),
-                            ))
+                            ...menus.map((i) =>
+                                GestureDetector(
+                                  onTap: (){
+                                      // Print("");
+                                    _opimUtils.toastMessage("tekan " +i.last.toString());
+                                  },
+                                  child: Card(
+                                        color:  HexColor("#32CD32"),
+                                        child: Center(child: Column(
+                                          children: <Widget>[
+                                            Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
+                                            Text(i.last, style:TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold)),
+                                            Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                                          ],
+                                         ),
+                                        ),
+                                  ),
+                                )
+                              //   Card(
+                              //   color:  HexColor("#32CD32"),
+                              //   child: Center(child: Column(
+                              //     children: <Widget>[
+                              //       Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
+                              //       Text(i.last, style:TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold)),
+                              //       Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                              //     ],
+                              //    ),
+                              //   ),
+                              // )
+                            )
                           ],
                         ),
                     ),flex:1,
@@ -169,13 +193,13 @@ class _HomeState extends State<Home>{
             children: <Widget>[
               Text('Informasi', style:TextStyle(fontSize: 18, color: Colors.black)),
               Text('Informasi terbaru untukmu ada disini', style:TextStyle(fontSize: 15, color: Colors.black)),
-              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              Padding(padding: EdgeInsets.only(top: 5.0)),
               listRestan,
-              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              Padding(padding: EdgeInsets.only(top: 5.0)),
               listLastLogin,
-              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              Padding(padding: EdgeInsets.only(top: 5.0)),
               listLastUploaded,
-              new Padding(padding: EdgeInsets.only(top: 5.0)),
+              Padding(padding: EdgeInsets.only(top: 5.0)),
               listLastSync
             ],
           ),
@@ -372,4 +396,5 @@ class _HomeState extends State<Home>{
   );
 
 }
+
 
