@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:opim_flutter/Menus/Account/Account.dart';
 import 'package:opim_flutter/Menus/History/History.dart';
-import 'package:opim_flutter/Menus/Home/Home.dart';
+import 'package:opim_flutter/Menus/Home/view/Home.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
 import 'package:opim_flutter/main.dart';
 

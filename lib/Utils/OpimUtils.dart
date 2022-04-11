@@ -1,6 +1,6 @@
 
 import 'dart:io';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -90,5 +90,16 @@ class OpimUtils{
                     )
                   ]));
         });
+  }
+
+  String dateChangeFormat(String stDateResource, String dateFormat){
+    String dateResult = "";
+    DateTime dtDateResource = DateTime.parse(stDateResource);
+    try{
+      dateResult = new DateFormat(dateFormat).format(dtDateResource);
+    }catch(error){
+      print("err parse date $error");
+    }
+    return dateResult;
   }
 }

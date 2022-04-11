@@ -1,32 +1,33 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:opim_flutter/Menus/Home/contract/HomeInterface.dart';
+import 'package:opim_flutter/Menus/Home/presenter/HomePresenter.dart';
+import 'package:opim_flutter/Model/database/entity/MUser.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
+import 'package:opim_flutter/Utils/ConstantsVar.dart';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home>{
+class _HomeState extends State<Home> implements HomeInterfaceView{
   String nameUser = "";
   String popUser = "";
   String qtyTph = "";
+  String lastLogin = "";
+  String lastUploaded = "";
+  String lastSync = "";
   List menus = [];
   OpimUtils _opimUtils = OpimUtils();
+  HomePresenter _homePresenter;
 
   @override
   void initState() {
     super.initState();
-    nameUser = "Budi";
-    popUser = "TSE - A";
-    qtyTph = "5 TPH belum di cek";
-    menus = [
-        ["assets/images/ic_panen.png", "Cek Hasil Panen"],
-        ["assets/images/ic_restan.png", "Cek Restan"],
-        ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
-        ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
-      ];
+    _homePresenter = HomePresenter(this);
+    _homePresenter.initViewData();
   }
 
   @override
@@ -69,10 +70,11 @@ class _HomeState extends State<Home>{
                         ),
                       ),
                     Expanded(child: Row(
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Container(
-                            padding: const EdgeInsets.only(bottom: 17.0),
+                            padding: const EdgeInsets.only(left: 65.0, bottom: 17.0),
                             child: Icon(
                                 Icons.shopping_bag,
                                 color: Colors.white,
@@ -129,32 +131,21 @@ class _HomeState extends State<Home>{
                             ...menus.map((i) =>
                                 GestureDetector(
                                   onTap: (){
-                                      // Print("");
                                     _opimUtils.toastMessage("tekan " +i.last.toString());
                                   },
                                   child: Card(
-                                        color:  HexColor("#32CD32"),
+                                        color:  i.last.toString() == "Cek Hasil Panen" ?
+                                        HexColor("#2F80ED") : HexColor("#A9A9A9"),
                                         child: Center(child: Column(
                                           children: <Widget>[
                                             Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
-                                            Text(i.last, style:TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold)),
+                                            Text(i.last, style:TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
                                             Padding(padding: EdgeInsets.only(bottom: 15.0)),
                                           ],
                                          ),
                                         ),
                                   ),
                                 )
-                              //   Card(
-                              //   color:  HexColor("#32CD32"),
-                              //   child: Center(child: Column(
-                              //     children: <Widget>[
-                              //       Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
-                              //       Text(i.last, style:TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold)),
-                              //       Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                              //     ],
-                              //    ),
-                              //   ),
-                              // )
                             )
                           ],
                         ),
@@ -286,7 +277,7 @@ class _HomeState extends State<Home>{
                   color: Colors.grey,
                 ),
                 new Padding(padding: EdgeInsets.only(right: 10.0)),
-                Text('dd/mm/yyyy')
+                Text(lastLogin)
               ],
             )
           ],
@@ -333,7 +324,7 @@ class _HomeState extends State<Home>{
                   color: Colors.grey,
                 ),
                 new Padding(padding: EdgeInsets.only(right: 10.0)),
-                Text('dd/mm/yyyy')
+                Text(lastUploaded)
               ],
             )
           ],
@@ -380,7 +371,7 @@ class _HomeState extends State<Home>{
                   color: Colors.grey,
                 ),
                 new Padding(padding: EdgeInsets.only(right: 10.0)),
-                Text('dd/mm/yyyy')
+                Text(lastSync)
               ],
             )
           ],
@@ -395,6 +386,36 @@ class _HomeState extends State<Home>{
     ),
   );
 
+  @override
+  void goToMenu(String menuName) {
+    // TODO: implement goToMenu
+  }
+
+  @override
+  void resultView(MUser mUser) {
+    if(mUser != null){
+      setState(() {
+        nameUser = mUser != null ?
+        mUser.firstName + " " +mUser.lastName : "" ;
+        popUser = mUser != null ? mUser.pop : "" ;
+        lastLogin = mUser != null ? _opimUtils.dateChangeFormat(
+            mUser.lastLoggedIn, ConstantsVar.slashDateTimeFormat) : "";
+        lastUploaded = mUser != null ? _opimUtils.dateChangeFormat(
+            mUser.lastUpload, ConstantsVar.slashDateTimeFormat) : "";
+        lastSync = mUser != null ? _opimUtils.dateChangeFormat(
+            mUser.lastSync, ConstantsVar.slashDateTimeFormat) : "";
+        qtyTph = "5 TPH belum di cek";
+        if(mUser != null && mUser.roleCode == "CHECKER_PANEN") {
+            menus = [
+              ["assets/images/ic_panen.png", "Cek Hasil Panen"],
+              ["assets/images/ic_restan.png", "Cek Restan"],
+              ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
+              ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
+            ];
+        }
+      });
+    }
+  }
 }
 
 
