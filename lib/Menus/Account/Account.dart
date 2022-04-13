@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Account extends StatefulWidget {
   @override
@@ -29,17 +30,40 @@ class _AccountState extends State<Account>{
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  new Padding(padding: EdgeInsets.only(top: 30.0)),
-                  Center(
-                    child: Image.asset('assets/images/ic_user.png', width: 190, height: 120,),
-                  )
-                ],
+              child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.only(top: 60.0)),
+                      Image.asset('assets/images/ic_user.png', width: 90, height: 80,),
+                      Padding(padding: EdgeInsets.only(top: 15.0)),
+                      Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                      Padding(padding: EdgeInsets.only(top: 10.0)),
+                      Text('Kode Pengguna : 20105695', style:TextStyle(fontSize: 15, color: Colors.white)),
+                      Padding(padding: EdgeInsets.only(top: 14.0)),
+                      Container(
+                        width: 130,
+                        height: 28,
+                        decoration: new BoxDecoration(
+                          color: HexColor("#99C68E"),
+                          borderRadius: new BorderRadius.only(
+                              topLeft:  const  Radius.circular(10.0),
+                              topRight: const  Radius.circular(10.0),
+                              bottomLeft:  const  Radius.circular(10.0),
+                              bottomRight: const  Radius.circular(10.0)
+                          ),
+                        ),
+                        child: Center(
+                          child: Text('Checker Panen', style:TextStyle(fontSize: 15, color: Colors.white)),
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 15.0)),
+                      Text('Versi : 1.3.0 ', style:TextStyle(fontSize: 15, color: Colors.white)),
+                    ],
+                  ),
               ),
             ),
-        ),flex: 3,),
+        ),flex: 4,),
         Expanded(child: Container(
           color: Colors.white,
         ),flex: 4,),
