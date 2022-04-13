@@ -7,6 +7,14 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account>{
+  String nameUser = "";
+  String nikUser = "";
+  String userRole = "";
+  String popUser = "";
+  String divisionUser = "";
+  String imeiUser = "";
+  String lastLoginUser = "";
+  String registeredDateUser = "";
 
   @override
   Widget build(BuildContext context) {
