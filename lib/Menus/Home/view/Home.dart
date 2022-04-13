@@ -50,37 +50,44 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
     children: <Widget>[
       Expanded(child: Container(
           color: Colors.green,
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Row(
-                  children: <Widget>[
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/ic_tse_bg.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
                       Expanded(child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                              Container(
-                                padding: const EdgeInsets.only(left: 25.0, top: 40.0),
-                                child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(left: 25.0, top: 7.0),
-                                child: Text(nameUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
-                              ),
-                          ],
-                        ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 25.0, top: 40.0),
+                            child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 25.0, top: 7.0),
+                            child: Text(nameUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                          ),
+                        ],
                       ),
-                    Expanded(child: Row(
+                      ),
+                      Expanded(child: Row(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Container(
                             padding: const EdgeInsets.only(left: 65.0, bottom: 17.0),
                             child: Icon(
-                                Icons.shopping_bag,
-                                color: Colors.white,
-                                size: 45,
-                              ),
+                              Icons.shopping_bag,
+                              color: Colors.white,
+                              size: 45,
                             ),
+                          ),
                           new Padding(padding: EdgeInsets.only(right: 10.0)),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,16 +104,17 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                           ),
                         ],
                       )
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-                  Container(
-                    margin: EdgeInsets.only(top: 0.0, left: 25.0,right: 25.0, bottom: 127.0),
-                    child: Divider(color: Colors.white, height: 2),
-              ),
-            ],
+                Container(
+                  margin: EdgeInsets.only(top: 0.0, left: 25.0,right: 25.0, bottom: 127.0),
+                  child: Divider(color: Colors.white, height: 2),
+                ),
+              ],
+            ),
           ),
       ),flex: 3,),
       Expanded(child: Container(

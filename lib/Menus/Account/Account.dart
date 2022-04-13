@@ -21,7 +21,24 @@ class _AccountState extends State<Account>{
   get dashAccount => Column(
       children: <Widget>[
         Expanded(child: Container(
-          color: Colors.green,
+           color: Colors.green,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/ic_tse_bg.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  new Padding(padding: EdgeInsets.only(top: 30.0)),
+                  Center(
+                    child: Image.asset('assets/images/ic_user.png', width: 190, height: 120,),
+                  )
+                ],
+              ),
+            ),
         ),flex: 3,),
         Expanded(child: Container(
           color: Colors.white,
