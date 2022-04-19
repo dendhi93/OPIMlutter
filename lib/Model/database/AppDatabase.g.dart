@@ -80,7 +80,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `MUser` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `firstName` TEXT, `lastName` TEXT, `roleName` TEXT, `roleCode` TEXT, `lastLoggedIn` TEXT, `registrationDate` TEXT, `popid` TEXT, `pop` TEXT, `division` TEXT, `imei` TEXT, `lastUpload` TEXT, `lastSync` TEXT, `userToken` TEXT, `companyCode` TEXT, `passwordUser` TEXT)');
+            'CREATE TABLE IF NOT EXISTS `MUser` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `nik` TEXT, `firstName` TEXT, `lastName` TEXT, `roleName` TEXT, `roleCode` TEXT, `lastLoggedIn` TEXT, `registrationDate` TEXT, `popid` TEXT, `pop` TEXT, `division` TEXT, `imei` TEXT, `lastUpload` TEXT, `lastSync` TEXT, `userToken` TEXT, `companyCode` TEXT, `passwordUser` TEXT)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -100,47 +100,49 @@ class _$MUserDao extends MUserDao {
         _mUserInsertionAdapter = InsertionAdapter(
             database,
             'MUser',
-            (MUser item) => <String, Object>{
-                  'id': item.id,
-                  'firstName': item.firstName,
-                  'lastName': item.lastName,
-                  'roleName': item.roleName,
-                  'roleCode': item.roleCode,
-                  'lastLoggedIn': item.lastLoggedIn,
-                  'registrationDate': item.registrationDate,
-                  'popid': item.popid,
-                  'pop': item.pop,
-                  'division': item.division,
-                  'imei': item.imei,
-                  'lastUpload': item.lastUpload,
-                  'lastSync': item.lastSync,
-                  'userToken': item.userToken,
-                  'companyCode': item.companyCode,
-                  'passwordUser': item.passwordUser
-                }, changeListener),
+                (MUser item) => <String, Object>{
+              'id': item.id,
+              'nik': item.nik,
+              'firstName': item.firstName,
+              'lastName': item.lastName,
+              'roleName': item.roleName,
+              'roleCode': item.roleCode,
+              'lastLoggedIn': item.lastLoggedIn,
+              'registrationDate': item.registrationDate,
+              'popid': item.popid,
+              'pop': item.pop,
+              'division': item.division,
+              'imei': item.imei,
+              'lastUpload': item.lastUpload,
+              'lastSync': item.lastSync,
+              'userToken': item.userToken,
+              'companyCode': item.companyCode,
+              'passwordUser': item.passwordUser
+            }, changeListener),
         _mUserDeletionAdapter = DeletionAdapter(
-                    database,
-                    'MUser',
-                    ['id'],
-                        (MUser item) => <String, dynamic>{
-                          'id': item.id,
-                          'firstName': item.firstName,
-                          'lastName': item.lastName,
-                          'roleName': item.roleName,
-                          'roleCode': item.roleCode,
-                          'lastLoggedIn': item.lastLoggedIn,
-                          'registrationDate': item.registrationDate,
-                          'popid': item.popid,
-                          'pop': item.pop,
-                          'division': item.division,
-                          'imei': item.imei,
-                          'lastUpload': item.lastUpload,
-                          'lastSync': item.lastSync,
-                          'userToken': item.userToken,
-                          'companyCode': item.companyCode,
-                          'passwordUser': item.passwordUser
-                    },
-                    changeListener);
+            database,
+            'MUser',
+            ['id'],
+                (MUser item) => <String, dynamic>{
+              'id': item.id,
+              'nik': item.nik,
+              'firstName': item.firstName,
+              'lastName': item.lastName,
+              'roleName': item.roleName,
+              'roleCode': item.roleCode,
+              'lastLoggedIn': item.lastLoggedIn,
+              'registrationDate': item.registrationDate,
+              'popid': item.popid,
+              'pop': item.pop,
+              'division': item.division,
+              'imei': item.imei,
+              'lastUpload': item.lastUpload,
+              'lastSync': item.lastSync,
+              'userToken': item.userToken,
+              'companyCode': item.companyCode,
+              'passwordUser': item.passwordUser
+            },
+            changeListener);
 
   final sqflite.DatabaseExecutor database;
 
@@ -154,6 +156,7 @@ class _$MUserDao extends MUserDao {
 
   static final _mUserMapper = (Map<String, dynamic> row) => MUser(
       row['id'] as int,
+      row['nik'] as String,
       row['firstName'] as String,
       row['lastName'] as String,
       row['roleName'] as String,
@@ -180,7 +183,7 @@ class _$MUserDao extends MUserDao {
   @override
   Stream<List<MUser>> fetchStreamDataUser() {
     return _queryAdapter.queryListStream('SELECT * FROM MUser order by id desc',
-         mapper: _mUserMapper);
+        mapper: _mUserMapper);
   }
 
   @override
@@ -196,7 +199,7 @@ class _$MUserDao extends MUserDao {
 
   @override
   Future<void> updateUserLogIn(int id) async {
-    await _queryAdapter.queryNoReturn('update MUser set isLoggedIn=false where id = ?',
+    await _queryAdapter.queryNoReturn('update MUser set userToken="'""'" where id = ?',
         arguments: <dynamic>[id]);
   }
 
