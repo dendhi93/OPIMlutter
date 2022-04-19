@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:opim_flutter/Menus/Account/contract/AccountInterface.dart';
+import 'package:opim_flutter/Menus/Account/presenter/AccountPresenter.dart';
+import 'package:opim_flutter/Model/database/entity/MUser.dart';
 
 class Account extends StatefulWidget {
   @override
   _AccountState createState() => _AccountState();
 }
 
-class _AccountState extends State<Account>{
+class _AccountState extends State<Account> implements AccountInterfaceView{
   String nameUser = "";
   String nikUser = "";
   String userRole = "";
@@ -15,10 +18,19 @@ class _AccountState extends State<Account>{
   String imeiUser = "";
   String lastLoginUser = "";
   String registeredDateUser = "";
+  String versionApps = "";
+  AccountPresenter _accountPresenter;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: _initViewAccount(context),);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _accountPresenter = AccountPresenter(this);
+    _accountPresenter.initViewData();
   }
 
   Widget _initViewAccount(BuildContext context){
@@ -45,9 +57,9 @@ class _AccountState extends State<Account>{
                       Padding(padding: EdgeInsets.only(top: 60.0)),
                       Image.asset('assets/images/ic_user.png', width: 90, height: 80,),
                       Padding(padding: EdgeInsets.only(top: 20.0)),
-                      Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                      Text(nameUser, style:TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
                       Padding(padding: EdgeInsets.only(top: 10.0)),
-                      Text('Kode Pengguna : 20105695', style:TextStyle(fontSize: 15, color: Colors.white)),
+                      Text(nikUser, style:TextStyle(fontSize: 15, color: Colors.white)),
                       Padding(padding: EdgeInsets.only(top: 14.0)),
                       Container(
                         width: 130,
@@ -62,11 +74,11 @@ class _AccountState extends State<Account>{
                           ),
                         ),
                         child: Center(
-                          child: Text('Checker Panen', style:TextStyle(fontSize: 15, color: Colors.white)),
+                          child: Text(userRole, style:TextStyle(fontSize: 15, color: Colors.white)),
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(top: 15.0)),
-                      Text('Versi : 1.3.0 ', style:TextStyle(fontSize: 15, color: Colors.white)),
+                      Text(versionApps, style:TextStyle(fontSize: 15, color: Colors.white)),
                     ],
                   ),
               ),
@@ -82,7 +94,6 @@ class _AccountState extends State<Account>{
               children: <Widget>[
                 popColumn,
                 divisionColumn,
-                nikColumn,
                 imeiColumn,
                 lastLoginColumn,
                 registerDateColumn,
@@ -91,7 +102,6 @@ class _AccountState extends State<Account>{
                   onTap: (){ print("coba");},
                   child: Expanded(
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         Image.asset('assets/images/ic_logout.png', width: 50, height: 30,),
                         Text('Keluar ', style:TextStyle(fontSize: 14, color: Colors.black)),
@@ -118,7 +128,7 @@ class _AccountState extends State<Account>{
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('POP A ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text(popUser, style:TextStyle(fontSize: 14, color: Colors.black)),
       ),
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Divider(color: HexColor("#D1D1D1"), height: 1),
@@ -136,28 +146,10 @@ class _AccountState extends State<Account>{
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('POP A ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text(divisionUser, style:TextStyle(fontSize: 14, color: Colors.black)),
       ),
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Divider(color: Colors.black, height: 1),
-    ],
-  );
-
-  get nikColumn => Column(
-    mainAxisSize: MainAxisSize.max,
-    children: <Widget>[
-      Padding(padding: EdgeInsets.only(top: 10.0)),
-      Container(
-        alignment: Alignment.topLeft,
-        child: Text('NIK ', style:TextStyle(fontSize: 14, color: Colors.black)),
-      ),
-      Padding(padding: EdgeInsets.only(top: 5.0)),
-      Container(
-        alignment: Alignment.topLeft,
-        child: Text('POP A ', style:TextStyle(fontSize: 14, color: Colors.black)),
-      ),
-      Padding(padding: EdgeInsets.only(top: 10.0)),
-      Divider(color: HexColor("#D1D1D1"), height: 1),
     ],
   );
 
@@ -172,7 +164,7 @@ class _AccountState extends State<Account>{
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('POP A ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text(imeiUser, style:TextStyle(fontSize: 14, color: Colors.black)),
       ),
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Divider(color: Colors.black, height: 1),
@@ -190,7 +182,7 @@ class _AccountState extends State<Account>{
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('POP A ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text(lastLoginUser, style:TextStyle(fontSize: 14, color: Colors.black)),
       ),
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Divider(color: HexColor("#D1D1D1"), height: 1),
@@ -208,10 +200,31 @@ class _AccountState extends State<Account>{
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('POP A ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text(registeredDateUser, style:TextStyle(fontSize: 14, color: Colors.black)),
       ),
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Divider(color: Colors.black, height: 1),
     ],
   );
+
+  @override
+  void resultUserView(MUser mUser) {
+    if(mUser != null){
+      setState(() {
+        userRole = mUser.roleName;
+        nameUser = mUser.firstName + " " + mUser.lastName;
+        nikUser = "Kode Pengguna : " +mUser.nik;
+        popUser = mUser.pop;
+        divisionUser = mUser.division;
+        lastLoginUser = mUser.lastLoggedIn;
+        registeredDateUser = mUser.registrationDate;
+        imeiUser = mUser.imei;
+      });
+    }
+  }
+
+  @override
+  void resultVersion(String version) {
+    setState(() {versionApps = version;});
+  }
 }

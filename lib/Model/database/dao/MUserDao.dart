@@ -17,7 +17,7 @@ abstract class MUserDao{
   @delete
   Future<int> deleteAll(List<MUser> list);
 
-  @Query('update MUser set isLoggedIn=false where id=:id')
+  @Query('update MUser set userToken="'""'" where id=:id')
   Future<void> updateUserLogIn(int id);
 
   @Query('SELECT * FROM MUser')

@@ -6,6 +6,7 @@ import 'package:floor/floor.dart';
 class MUser{
   @PrimaryKey(autoGenerate: true)
   final int id;
+  final String nik;
   final String firstName;
   final String lastName;
   final String roleName;
@@ -26,6 +27,7 @@ class MUser{
 
 
   MUser(this.id,
+       this.nik,
        this.firstName,
         this.lastName,
         this.roleName,

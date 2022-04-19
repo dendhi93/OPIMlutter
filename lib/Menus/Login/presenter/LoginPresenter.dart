@@ -17,7 +17,7 @@ class LoginPresenter implements LoginInterfaceImpl{
   final database = $FloorAppDatabase.databaseBuilder('opim_database.db').build();
   ApiRepo _apiRepo = ApiRepo();
   String responseStatus = "";
-  String firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId;
+  String firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, nikUser;
   String popName, division, imei, lastUpload, lastSync, userToken, companyCode, passwordUser;
   MUser mUser;
   int maxId = 1;
@@ -48,6 +48,7 @@ class LoginPresenter implements LoginInterfaceImpl{
         responseStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
         view?.loadingBar(ConstantsVar.hideLoadingBar),
         if(responseStatus == ConstantsVar.successStatusCode){
+          nikUser = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.usercode,
           firstName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.firstname,
           lastName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.lastname,
           roleName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.roledescname,
@@ -69,7 +70,7 @@ class LoginPresenter implements LoginInterfaceImpl{
                   maxId = onValueMax.id + 1
                 }
             });
-            mUser = MUser(maxId, firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
+            mUser = MUser(maxId, nikUser,firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
             onValueDB.userDAO.insertUser(mUser);
             view?.goToHome();
           }),

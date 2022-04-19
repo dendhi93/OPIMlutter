@@ -8,7 +8,6 @@ class HomePresenter implements HomeInterfaceImpl{
   HomePresenter(this.homeView);
   final database = $FloorAppDatabase.databaseBuilder('opim_database.db').build();
 
-
   @override
   void destroyHomeView() => homeView = null;
 
