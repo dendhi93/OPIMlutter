@@ -27,4 +27,9 @@ class AccountPresenter implements AccountInterfaceImpl{
     _accountView.resultVersion("Versi : " +_packageInfo.version);
   }
 
+  @override
+  void logoutProcess() {
+    print("logout");
+  }
+
 }

@@ -8,6 +8,7 @@ class ConstantsVar{
 
   //message
   static String loadingMessage = "Please wait while downloading data";
+
   //code
   static String successStatusCode = "200";
   static String failedStatusCode = "401";
@@ -17,5 +18,6 @@ class ConstantsVar{
   static int hideLoadingBar = 22;
 
   //dateFormat
-  static String slashDateTimeFormat = "dd/MM/yyyy HH:mm:ss";
+  static String slashDateTimeFormat = "dd/MM/yyyy • HH:mm:ss";
+  static String slashDateFormat = "dd/MM/yyyy";
 }

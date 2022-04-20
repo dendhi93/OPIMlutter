@@ -92,6 +92,99 @@ class OpimUtils{
         });
   }
 
+
+  // void showYesNoActionDialog(String title, String content, BuildContext context, YesNoAction dialogAction) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //             title: new Text(title),
+  //             content: new Text(content),
+  //             actions: <Widget>[
+  //               new TextButton(
+  //                   onPressed: () {
+  //                     Navigator.of(context).pop();
+  //                     dialogAction.yesAction();
+  //                   },
+  //                   child: new Text("Yes")),
+  //               new TextButton(
+  //                   onPressed: () {
+  //                     Navigator.of(context).pop();
+  //                   },
+  //                   child: new Text("No"))
+  //             ]
+  //         );
+  //       }
+  //   );
+  // }
+
+  void showYesNoActionDialog(String content, BuildContext context, DialogAction dialogAction) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.circular(30.0)), //this right here
+            child: Container(
+              height: 220,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Image.asset('assets/images/opim_launcher.png', width: 80, height: 60,),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 20.0)),
+                    Text(
+                      content,
+                      style: TextStyle(fontSize: 15.0, color: Colors.black),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 40.0)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                          SizedBox(
+                            width: 150,
+                            height: 40,
+                            child: RawMaterialButton(
+                              onPressed: () {
+                                dialogAction.yesAction();
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                "OK",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              fillColor: Colors.blue,
+                            ),
+                          ),
+                        SizedBox(
+                          width: 150,
+                          height: 40,
+                          child: RawMaterialButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            fillColor: Colors.red,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
   String dateChangeFormat(String stDateResource, String dateFormat){
     String dateResult = "";
     DateTime dtDateResource = DateTime.parse(stDateResource);
@@ -102,4 +195,9 @@ class OpimUtils{
     }
     return dateResult;
   }
+}
+
+class DialogAction{
+  void yesAction(){}
+  void noAction(){}
 }

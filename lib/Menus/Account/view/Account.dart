@@ -3,13 +3,15 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:opim_flutter/Menus/Account/contract/AccountInterface.dart';
 import 'package:opim_flutter/Menus/Account/presenter/AccountPresenter.dart';
 import 'package:opim_flutter/Model/database/entity/MUser.dart';
+import 'package:opim_flutter/Utils/ConstantsVar.dart';
+import 'package:opim_flutter/Utils/OpimUtils.dart';
 
 class Account extends StatefulWidget {
   @override
   _AccountState createState() => _AccountState();
 }
 
-class _AccountState extends State<Account> implements AccountInterfaceView{
+class _AccountState extends State<Account> implements AccountInterfaceView, DialogAction{
   String nameUser = "";
   String nikUser = "";
   String userRole = "";
@@ -20,6 +22,8 @@ class _AccountState extends State<Account> implements AccountInterfaceView{
   String registeredDateUser = "";
   String versionApps = "";
   AccountPresenter _accountPresenter;
+  OpimUtils _opimUtils = OpimUtils();
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   @override
   Widget build(BuildContext context) {
@@ -99,15 +103,20 @@ class _AccountState extends State<Account> implements AccountInterfaceView{
                 registerDateColumn,
                 Padding(padding: EdgeInsets.only(top: 20.0)),
                 GestureDetector(
-                  onTap: (){ print("coba");},
-                  child: Expanded(
-                    child: Row(
+                    onTap: (){
+                        _opimUtils.showYesNoActionDialog("Apakah anda yakin keluar aplikasi ?", context, this);
+                      },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Image.asset('assets/images/ic_logout.png', width: 50, height: 30,),
-                        Text('Keluar ', style:TextStyle(fontSize: 14, color: Colors.black)),
+                      Row(
+                            children: <Widget>[
+                              Image.asset('assets/images/ic_logout.png', width: 50, height: 30,),
+                              Text('Keluar ', style:TextStyle(fontSize: 14, color: Colors.black)),
+                            ],
+                        ),
                       ],
-                    ),
-                  )
+                    )
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 10.0)),
               ],
@@ -216,8 +225,8 @@ class _AccountState extends State<Account> implements AccountInterfaceView{
         nikUser = "Kode Pengguna : " +mUser.nik;
         popUser = mUser.pop;
         divisionUser = mUser.division;
-        lastLoginUser = mUser.lastLoggedIn;
-        registeredDateUser = mUser.registrationDate;
+        lastLoginUser = _opimUtils.dateChangeFormat(mUser.lastLoggedIn, ConstantsVar.slashDateTimeFormat);
+        registeredDateUser = _opimUtils.dateChangeFormat(mUser.registrationDate, ConstantsVar.slashDateFormat);
         imeiUser = mUser.imei;
       });
     }
@@ -226,5 +235,13 @@ class _AccountState extends State<Account> implements AccountInterfaceView{
   @override
   void resultVersion(String version) {
     setState(() {versionApps = version;});
+  }
+
+  @override
+  void noAction() {}
+
+  @override
+  void yesAction() {
+    _accountPresenter.logoutProcess();
   }
 }
