@@ -105,7 +105,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
                 Padding(padding: EdgeInsets.only(top: 20.0)),
                 GestureDetector(
                     onTap: (){
-                        _opimUtils.showYesNoActionDialog("Apakah anda yakin keluar aplikasi ?", context, this);
+                        _opimUtils.showYesNoActionDialog("Confirmation","Are you sure wanto to exit application ?", context, this);
                       },
                     child: Column(
                       mainAxisSize: MainAxisSize.max,

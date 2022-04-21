@@ -92,97 +92,145 @@ class OpimUtils{
         });
   }
 
-
-  // void showYesNoActionDialog(String title, String content, BuildContext context, YesNoAction dialogAction) {
+  // void showYesNoActionDialog(String content, BuildContext context, DialogAction dialogAction) {
   //   showDialog(
   //       context: context,
   //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //             title: new Text(title),
-  //             content: new Text(content),
-  //             actions: <Widget>[
-  //               new TextButton(
-  //                   onPressed: () {
-  //                     Navigator.of(context).pop();
-  //                     dialogAction.yesAction();
-  //                   },
-  //                   child: new Text("Yes")),
-  //               new TextButton(
-  //                   onPressed: () {
-  //                     Navigator.of(context).pop();
-  //                   },
-  //                   child: new Text("No"))
-  //             ]
+  //         return Dialog(
+  //           shape: RoundedRectangleBorder(
+  //               borderRadius:
+  //               BorderRadius.circular(30.0)), //this right here
+  //           child: Container(
+  //             height: 220,
+  //             child: Padding(
+  //               padding: const EdgeInsets.all(15.0),
+  //               child: Column(
+  //                 mainAxisSize: MainAxisSize.max,
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Center(
+  //                     child: Image.asset('assets/images/opim_launcher.png', width: 80, height: 60,),
+  //                   ),
+  //                   Padding(padding: EdgeInsets.only(top: 20.0)),
+  //                   Text(
+  //                     content,
+  //                     style: TextStyle(fontSize: 15.0, color: Colors.black),
+  //                   ),
+  //                   Padding(padding: EdgeInsets.only(top: 40.0)),
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                     children: <Widget>[
+  //                         SizedBox(
+  //                           width: 150,
+  //                           height: 40,
+  //                           child: RawMaterialButton(
+  //                             onPressed: () {
+  //                               dialogAction.yesAction();
+  //                               Navigator.of(context).pop();
+  //                             },
+  //                             child: Text(
+  //                               "OK",
+  //                               style: TextStyle(color: Colors.white),
+  //                             ),
+  //                             fillColor: Colors.blue,
+  //                           ),
+  //                         ),
+  //                       SizedBox(
+  //                         width: 150,
+  //                         height: 40,
+  //                         child: RawMaterialButton(
+  //                           onPressed: () {
+  //                             Navigator.of(context).pop();
+  //                           },
+  //                           child: Text(
+  //                             "Cancel",
+  //                             style: TextStyle(color: Colors.white),
+  //                           ),
+  //                           fillColor: Colors.red,
+  //                         ),
+  //                       )
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
   //         );
-  //       }
-  //   );
+  //       });
   // }
 
-  void showYesNoActionDialog(String content, BuildContext context, DialogAction dialogAction) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.circular(30.0)), //this right here
-            child: Container(
-              height: 220,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Image.asset('assets/images/opim_launcher.png', width: 80, height: 60,),
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 20.0)),
-                    Text(
-                      content,
-                      style: TextStyle(fontSize: 15.0, color: Colors.black),
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 40.0)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                          SizedBox(
-                            width: 150,
-                            height: 40,
-                            child: RawMaterialButton(
-                              onPressed: () {
-                                dialogAction.yesAction();
-                                Navigator.of(context).pop();
-                              },
-                              child: Text(
-                                "OK",
-                                style: TextStyle(color: Colors.white),
+  void showYesNoActionDialog(String title, String content, BuildContext context, DialogAction dialogAction) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+              return Dialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0)
+                  ),
+                  child: Stack(
+                    clipBehavior : Clip.none,
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Container(
+                        height: 200,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(30, 50, 30, 15),
+                          child: Column(
+                            children: [
+                              Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                              SizedBox(height: 5,),
+                              Text(content, style: TextStyle(fontSize: 15),),
+                              SizedBox(height: 35,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                        SizedBox(
+                                          width: 100,
+                                          height: 40,
+                                          child: RawMaterialButton(
+                                            onPressed: () {
+                                              dialogAction.yesAction();
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              "OK",
+                                              style: TextStyle(color: Colors.white),
+                                            ),
+                                            fillColor: Colors.red,
+                                          ),
+                                        ),
+                                      SizedBox(
+                                        width: 100,
+                                        height: 40,
+                                        child: RawMaterialButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text(
+                                            "Cancel",
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          fillColor: Colors.blue,
+                                        ),
+                                      )
+                                ],
                               ),
-                              fillColor: Colors.blue,
-                            ),
+                            ],
                           ),
-                        SizedBox(
-                          width: 150,
-                          height: 40,
-                          child: RawMaterialButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(
-                              "Cancel",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            fillColor: Colors.red,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
+                        ),
+                      ),
+                      Positioned(
+                          top: -55,
+                          child: CircleAvatar(
+                            backgroundColor: Colors.tealAccent,
+                            radius: 40,
+                            child: Image.asset('assets/images/opim_launcher.png', width: 80, height: 60,),
+                          )
+                      ),
+                    ],
+                  )
+              );
+          });
   }
 
   String dateChangeFormat(String stDateResource, String dateFormat){
