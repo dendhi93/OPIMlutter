@@ -16,6 +16,7 @@ class ConstantsVar{
   static String errorStatusMessage = "Internal server error";
   static int showLoadingBar = 11;
   static int hideLoadingBar = 22;
+  static String successStringStatus = "Success";
 
   //dateFormat
   static String slashDateTimeFormat = "dd/MM/yyyy • HH:mm:ss";

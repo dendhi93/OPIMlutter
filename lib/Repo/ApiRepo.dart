@@ -17,9 +17,31 @@ class ApiRepo{
         .post(Uri.parse(urlPostLogin),
         headers: {'Content-Type': 'application/json',},
         body: PostLogin().loginToJson(_postLogin)
-    ).timeout(Duration(seconds: 50));
+    ).timeout(Duration(seconds: 100));
 
     print(responseLogin.body);
     return responseLogin.body;
   }
+
+  Future<String> getAllMasterData(String getToken) async{
+    String urlAllMasterData = ConstantsVar.urlApi +'master010/allmaster';
+    print('url $Uri.parse(urlAllMasterData)');
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $getToken'
+    };
+
+    final http.Response responseAllMaster = await http
+        .get(Uri.parse(urlAllMasterData),
+        headers: requestHeaders
+    ).timeout(Duration(minutes: 30),
+        onTimeout: (){
+          throw new Exception("time out");
+        });
+
+    print(responseAllMaster.body);
+    return responseAllMaster.body;
+  }
+
 }
