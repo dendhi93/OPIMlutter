@@ -31,7 +31,6 @@ class AccountPresenter implements AccountInterfaceImpl{
 
   @override
   void logoutProcess() {
-    print("logout with id " +idUser.toString());
     database.then((onValueDb) => {
       onValueDb.userDAO.updateUserLogIn(idUser),
       new Future.delayed(const Duration(seconds: 2), () {
@@ -39,5 +38,4 @@ class AccountPresenter implements AccountInterfaceImpl{
       })
     });
   }
-
 }
