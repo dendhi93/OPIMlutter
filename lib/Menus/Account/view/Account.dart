@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:opim_flutter/Menus/Account/contract/AccountInterface.dart';
 import 'package:opim_flutter/Menus/Account/presenter/AccountPresenter.dart';
+import 'package:opim_flutter/Menus/Login/view/Login.dart';
 import 'package:opim_flutter/Model/database/entity/MUser.dart';
 import 'package:opim_flutter/Utils/ConstantsVar.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
@@ -243,5 +244,14 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
   @override
   void yesAction() {
     _accountPresenter.logoutProcess();
+  }
+
+  @override
+  void goToLogin() {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder:
+            (context) => Login()
+        ));
+    _accountPresenter.destroyAccountView();
   }
 }

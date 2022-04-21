@@ -208,4 +208,9 @@ class _$MUserDao extends MUserDao {
     return _queryAdapter.queryList('SELECT * FROM MUser', mapper: _mUserMapper);
   }
 
+  @override
+  Future<void> deleteAllUser() async {
+    await _queryAdapter.query('delete from MUser', mapper:_mUserMapper);
+  }
+
 }

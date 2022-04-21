@@ -6,6 +6,7 @@ class AccountPresenter implements AccountInterfaceImpl{
   AccountInterfaceView _accountView;
   AccountPresenter(this._accountView);
   final database = $FloorAppDatabase.databaseBuilder('opim_database.db').build();
+  int idUser = 0;
 
   @override
   void destroyAccountView() => _accountView = null;
@@ -16,7 +17,8 @@ class AccountPresenter implements AccountInterfaceImpl{
     database.then((onValueDb) => {
       onValueDb.userDAO.findAllUser().then((valueQuery) => {
         if(valueQuery != null){
-          _accountView?.resultUserView(valueQuery[0]),
+          _accountView?.resultUserView(valueQuery[valueQuery.length - 1]),
+          idUser = valueQuery[valueQuery.length - 1].id,
         }
       })
     });
@@ -29,7 +31,13 @@ class AccountPresenter implements AccountInterfaceImpl{
 
   @override
   void logoutProcess() {
-    print("logout");
+    print("logout with id " +idUser.toString());
+    database.then((onValueDb) => {
+      onValueDb.userDAO.updateUserLogIn(idUser),
+      new Future.delayed(const Duration(seconds: 2), () {
+         _accountView.goToLogin();
+      })
+    });
   }
 
 }

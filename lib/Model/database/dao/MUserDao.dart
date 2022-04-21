@@ -23,4 +23,7 @@ abstract class MUserDao{
   @Query('SELECT * FROM MUser')
   Future<List<MUser>> findAllUser();
 
+  @Query('delete from MUser')
+  Future<void> deleteAllUser();
+
 }

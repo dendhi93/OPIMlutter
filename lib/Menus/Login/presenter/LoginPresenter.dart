@@ -71,6 +71,7 @@ class LoginPresenter implements LoginInterfaceImpl{
                 }
             });
             mUser = MUser(maxId, nikUser,firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
+            onValueDB.userDAO.deleteAllUser();
             onValueDB.userDAO.insertUser(mUser);
             view?.goToHome();
           }),

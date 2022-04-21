@@ -1,3 +1,5 @@
+import 'package:opim_flutter/Utils/OpimUtils.dart';
+
 import '../../../Model/database/entity/MUser.dart';
 
 class AccountInterfaceImpl{
@@ -9,4 +11,5 @@ class AccountInterfaceImpl{
 class AccountInterfaceView{
   void resultUserView(MUser mUser){}
   void resultVersion(String version){}
+  void goToLogin(){}
 }
