@@ -27,15 +27,16 @@ class Data{
   List<Tph> tph;
   List<Pop> pop;
   List<Alatberat> alatberat;
-  // List<Mandorperawatan> mandorperawatan;
+  List<Mandorperawatan> mandorperawatan;
   // List<Weightbridge> weightbridge;
   // List<Company> company;
-  // List<Block> block;
-  // List<Ketuateam> ketuateam;
+   List<Block> block;
+  List<Ketuateam> ketuateam;
   // List<ActivityList> activityList;
   // List<Tenagakerja> tenagakerja;
 
   // Data({this.jalan, this.kendaraan, this.mandor, this.tipealatberat, this.ancak, this.checkerperawatan, this.divisi, this.tph, this.pop, this.alatberat, this.mandorperawatan, this.weightbridge, this.company, this.block, this.ketuateam, this.activityList, this.tenagakerja});
+  Data({this.jalan, this.kendaraan, this.mandor, this.tipealatberat, this.ancak, this.checkerperawatan, this.divisi, this.tph, this.pop, this.alatberat, this.mandorperawatan, this.block, this.ketuateam});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['jalan'] != null) {
@@ -78,10 +79,10 @@ class Data{
       alatberat = <Alatberat>[];
       json['alatberat'].forEach((v) { alatberat.add(new Alatberat.fromJson(v)); });
     }
-    // if (json['mandorperawatan'] != null) {
-    //   mandorperawatan = <Mandorperawatan>[];
-    //   json['mandorperawatan'].forEach((v) { mandorperawatan!.add(new Mandorperawatan.fromJson(v)); });
-    // }
+    if (json['mandorperawatan'] != null) {
+      mandorperawatan = <Mandorperawatan>[];
+      json['mandorperawatan'].forEach((v) { mandorperawatan.add(new Mandorperawatan.fromJson(v)); });
+    }
     // if (json['weightbridge'] != null) {
     //   weightbridge = <Weightbridge>[];
     //   json['weightbridge'].forEach((v) { weightbridge!.add(new Weightbridge.fromJson(v)); });
@@ -529,6 +530,143 @@ class AlatberatUnionFieldCode {
     alatBeratCode = json['alatBeratCode'];
   }
 }
+
+class Mandorperawatan{
+  int userid;
+  String usercode;
+  String userFullname;
+  String refGroupRolecode;
+  String roleDescname;
+  String companycode;
+  String popcode;
+  String divisicode;
+
+  Mandorperawatan({this.userid,
+    this.usercode,
+    this.userFullname,
+    this.refGroupRolecode,
+    this.roleDescname,
+    this.companycode,
+    this.popcode,
+    this.divisicode});
+
+  Mandorperawatan.fromJson(Map<String, dynamic> json) {
+    userid = json['userid'];
+    usercode = json['usercode'];
+    userFullname = json['userFullname'];
+    refGroupRolecode = json['refGroupRolecode'];
+    roleDescname = json['roleDescname'];
+    companycode = json['companycode'];
+    popcode = json['popcode'];
+    divisicode = json['divisicode'];
+  }
+}
+
+class Block{
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int blockid;
+  String blockcode;
+  String blokdescname;
+  int refDivisiId;
+  String majorPlantYear;
+  String planted;
+  String totalTrees;
+  String jenisBibit;
+  String topography;
+  String radius;
+  String companycode;
+  String popcode;
+  String divisicode;
+  String grade;
+  String gisAreatype;
+  String luasArea;
+  String gisAreajson;
+  String blockIntegrityCode;
+
+  Block(
+      {this.insertByDevicecode,
+        this.updateByDevicecode,
+        this.blockid,
+        this.blockcode,
+        this.blokdescname,
+        this.refDivisiId,
+        this.majorPlantYear,
+        this.planted,
+        this.totalTrees,
+        this.jenisBibit,
+        this.topography,
+        this.radius,
+        this.companycode,
+        this.popcode,
+        this.divisicode,
+        this.grade,
+        this.gisAreatype,
+        this.luasArea,
+        this.gisAreajson,
+        this.blockIntegrityCode});
+
+  Block.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    blockid = json['blockid'];
+    blockcode = json['blockcode'];
+    blokdescname = json['blokdescname'];
+    refDivisiId = json['ref_divisi_id'];
+    majorPlantYear = json['major_plant_year'];
+    planted = json['planted'];
+    totalTrees = json['total_trees'];
+    jenisBibit = json['jenis_bibit'];
+    topography = json['topography'];
+    radius = json['radius'];
+    companycode = json['companycode'];
+    popcode = json['popcode'];
+    divisicode = json['divisicode'];
+    grade = json['grade'];
+    gisAreatype = json['gis_areatype'];
+    luasArea = json['luasArea'];
+    gisAreajson = json['gis_areajson'];
+    blockIntegrityCode = json['block_integrity_code'];
+  }
+}
+class Ketuateam{
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int ketuaTeamId;
+  String kodeTeam;
+  String ketuaTeamCode;
+  String namaKetuateam;
+  String companycode;
+  String refPopcode;
+  String divisicode;
+  String isActive;
+
+  Ketuateam(
+      {this.insertByDevicecode,
+        this.updateByDevicecode,
+        this.ketuaTeamId,
+        this.kodeTeam,
+        this.ketuaTeamCode,
+        this.namaKetuateam,
+        this.companycode,
+        this.refPopcode,
+        this.divisicode,
+        this.isActive});
+
+  Ketuateam.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    ketuaTeamId = json['ketuaTeamId'];
+    kodeTeam = json['kodeTeam'];
+    ketuaTeamCode = json['ketuaTeamCode'];
+    namaKetuateam = json['namaKetuateam'];
+    companycode = json['companycode'];
+    refPopcode = json['refPopcode'];
+    divisicode = json['divisicode'];
+    isActive = json['isActive'];
+  }
+}
+
 
 
 
