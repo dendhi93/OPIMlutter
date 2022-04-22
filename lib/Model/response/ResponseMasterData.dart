@@ -18,15 +18,15 @@ class ResponseMasterData{
 
 class Data{
   List<Jalan> jalan;
-  // List<Kendaraan> kendaraan;
-  // List<Mandor> mandor;
-  // List<Tipealatberat> tipealatberat;
-  // List<Ancak> ancak;
-  // List<Checkerperawatan> checkerperawatan;
-  // List<Divisi> divisi;
-  // List<Tph> tph;
-  // List<Pop> pop;
-  // List<Alatberat> alatberat;
+  List<Kendaraan> kendaraan;
+  List<Mandor> mandor;
+  List<Tipealatberat> tipealatberat;
+  List<Ancak> ancak;
+  List<Checkerperawatan> checkerperawatan;
+  List<Divisi> divisi;
+  List<Tph> tph;
+  List<Pop> pop;
+  List<Alatberat> alatberat;
   // List<Mandorperawatan> mandorperawatan;
   // List<Weightbridge> weightbridge;
   // List<Company> company;
@@ -42,42 +42,42 @@ class Data{
       jalan = <Jalan>[];
       json['jalan'].forEach((v) { jalan.add(new Jalan.fromJson(v)); });
     }
-    // if (json['kendaraan'] != null) {
-    //   kendaraan = <Kendaraan>[];
-    //   json['kendaraan'].forEach((v) { kendaraan!.add(new Kendaraan.fromJson(v)); });
-    // }
-    // if (json['mandor'] != null) {
-    //   mandor = <Mandor>[];
-    //   json['mandor'].forEach((v) { mandor!.add(new Mandor.fromJson(v)); });
-    // }
-    // if (json['tipealatberat'] != null) {
-    //   tipealatberat = <Tipealatberat>[];
-    //   json['tipealatberat'].forEach((v) { tipealatberat!.add(new Tipealatberat.fromJson(v)); });
-    // }
-    // if (json['ancak'] != null) {
-    //   ancak = <Ancak>[];
-    //   json['ancak'].forEach((v) { ancak!.add(new Ancak.fromJson(v)); });
-    // }
-    // if (json['checkerperawatan'] != null) {
-    //   checkerperawatan = <Checkerperawatan>[];
-    //   json['checkerperawatan'].forEach((v) { checkerperawatan!.add(new Checkerperawatan.fromJson(v)); });
-    // }
-    // if (json['divisi'] != null) {
-    //   divisi = <Divisi>[];
-    //   json['divisi'].forEach((v) { divisi!.add(new Divisi.fromJson(v)); });
-    // }
-    // if (json['tph'] != null) {
-    //   tph = <Tph>[];
-    //   json['tph'].forEach((v) { tph!.add(new Tph.fromJson(v)); });
-    // }
-    // if (json['pop'] != null) {
-    //   pop = <Pop>[];
-    //   json['pop'].forEach((v) { pop!.add(new Pop.fromJson(v)); });
-    // }
-    // if (json['alatberat'] != null) {
-    //   alatberat = <Alatberat>[];
-    //   json['alatberat'].forEach((v) { alatberat!.add(new Alatberat.fromJson(v)); });
-    // }
+    if (json['kendaraan'] != null) {
+      kendaraan = <Kendaraan>[];
+      json['kendaraan'].forEach((v) { kendaraan.add(new Kendaraan.fromJson(v)); });
+    }
+    if (json['mandor'] != null) {
+      mandor = <Mandor>[];
+      json['mandor'].forEach((v) { mandor.add(new Mandor.fromJson(v)); });
+    }
+    if (json['tipealatberat'] != null) {
+      tipealatberat = <Tipealatberat>[];
+      json['tipealatberat'].forEach((v) { tipealatberat.add(new Tipealatberat.fromJson(v)); });
+    }
+    if (json['ancak'] != null) {
+      ancak = <Ancak>[];
+      json['ancak'].forEach((v) { ancak.add(new Ancak.fromJson(v)); });
+    }
+    if (json['checkerperawatan'] != null) {
+      checkerperawatan = <Checkerperawatan>[];
+      json['checkerperawatan'].forEach((v) { checkerperawatan.add(new Checkerperawatan.fromJson(v)); });
+    }
+    if (json['divisi'] != null) {
+      divisi = <Divisi>[];
+      json['divisi'].forEach((v) { divisi.add(new Divisi.fromJson(v)); });
+    }
+    if (json['tph'] != null) {
+      tph = <Tph>[];
+      json['tph'].forEach((v) { tph.add(new Tph.fromJson(v)); });
+    }
+    if (json['pop'] != null) {
+      pop = <Pop>[];
+      json['pop'].forEach((v) { pop.add(new Pop.fromJson(v)); });
+    }
+    if (json['alatberat'] != null) {
+      alatberat = <Alatberat>[];
+      json['alatberat'].forEach((v) { alatberat.add(new Alatberat.fromJson(v)); });
+    }
     // if (json['mandorperawatan'] != null) {
     //   mandorperawatan = <Mandorperawatan>[];
     //   json['mandorperawatan'].forEach((v) { mandorperawatan!.add(new Mandorperawatan.fromJson(v)); });
@@ -191,4 +191,349 @@ class KondisiJalanItem{
     foto3 = json['foto3'];
   }
 }
+
+class Kendaraan{
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int kendaraanId;
+  String kendaraanCode;
+  String getdateFromSap;
+  bool isActive;
+  String refPopcode;
+  String equnr258;
+
+  Kendaraan(
+      {this.insertByDevicecode,
+        this.updateByDevicecode,
+        this.kendaraanId,
+        this.kendaraanCode,
+        this.getdateFromSap,
+        this.isActive,
+        this.refPopcode,
+        this.equnr258});
+
+  Kendaraan.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    kendaraanId = json['kendaraanId'];
+    kendaraanCode = json['kendaraanCode'];
+    getdateFromSap = json['getdateFromSap'];
+    isActive = json['isActive'];
+    refPopcode = json['refPopcode'];
+    equnr258 = json['equnr258'];
+  }
+}
+
+class Mandor{
+  String registrationDate;
+  String imei;
+  String usercode;
+  String firstname;
+  String lastname;
+  String refGrouprolecode;
+  String refCompanycode;
+  String refDevicecode;
+  String gradeKPI;
+  int id;
+  String companyname;
+  String roledescname;
+  String popname;
+  String rolecode;
+  String popcode;
+  String roleLevel;
+  String divisicode;
+
+  Mandor(
+      {this.registrationDate,
+        this.imei,
+        this.usercode,
+        this.firstname,
+        this.lastname,
+        this.refGrouprolecode,
+        this.refCompanycode,
+        this.refDevicecode,
+        this.gradeKPI,
+        this.id,
+        this.companyname,
+        this.roledescname,
+        this.popname,
+        this.rolecode,
+        this.popcode,
+        this.roleLevel,
+        this.divisicode});
+
+  Mandor.fromJson(Map<String, dynamic> json) {
+    registrationDate = json['registrationDate'];
+    imei = json['imei'];
+    usercode = json['usercode'];
+    firstname = json['firstname'];
+    lastname = json['lastname'];
+    refGrouprolecode = json['ref_grouprolecode'];
+    refCompanycode = json['ref_companycode'];
+    refDevicecode = json['ref_devicecode'];
+    gradeKPI = json['gradeKPI'];
+    id = json['id'];
+    companyname = json['companyname'];
+    roledescname = json['roledescname'];
+    popname = json['popname'];
+    rolecode = json['rolecode'];
+    popcode = json['popcode'];
+    roleLevel = json['roleLevel'];
+    divisicode = json['divisicode'];
+  }
+}
+
+class Tipealatberat{
+  String alatBeratType;
+
+  Tipealatberat({this.alatBeratType});
+
+  Tipealatberat.fromJson(Map<String, dynamic> json) {
+    alatBeratType = json['alatBeratType'];
+  }
+}
+
+class Ancak{
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int ancakid;
+  String ancakcode;
+  int refBlockid;
+  String popcode;
+  String divisicode;
+  String blockcode;
+  String ancakDescname;
+  String ancakIntegrityCode;
+  String grade;
+  String gisAreatype;
+  String gisAreajson;
+
+  Ancak(
+      {this.insertByDevicecode,
+        this.updateByDevicecode,
+        this.ancakid,
+        this.ancakcode,
+        this.refBlockid,
+        this.popcode,
+        this.divisicode,
+        this.blockcode,
+        this.ancakDescname,
+        this.ancakIntegrityCode,
+        this.grade,
+        this.gisAreatype,
+        this.gisAreajson});
+
+  Ancak.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    ancakid = json['ancakid'];
+    ancakcode = json['ancakcode'];
+    refBlockid = json['refBlockid'];
+    popcode = json['popcode'];
+    divisicode = json['divisicode'];
+    blockcode = json['blockcode'];
+    ancakDescname = json['ancakDescname'];
+    ancakIntegrityCode = json['ancakIntegrityCode'];
+    grade = json['grade'];
+    gisAreatype = json['gisAreatype'];
+    gisAreajson = json['gisAreajson'];
+  }
+}
+
+class Checkerperawatan{
+  int userid;
+  String usercode;
+  String userFullname;
+  String refGroupRolecode;
+  String roleDescname;
+  String companycode;
+  String popcode;
+  String divisicode;
+
+  Checkerperawatan(
+      {this.userid,
+        this.usercode,
+        this.userFullname,
+        this.refGroupRolecode,
+        this.roleDescname,
+        this.companycode,
+        this.popcode,
+        this.divisicode});
+
+  Checkerperawatan.fromJson(Map<String, dynamic> json) {
+    userid = json['userid'];
+    usercode = json['usercode'];
+    userFullname = json['userFullname'];
+    refGroupRolecode = json['refGroupRolecode'];
+    roleDescname = json['roleDescname'];
+    companycode = json['companycode'];
+    popcode = json['popcode'];
+    divisicode = json['divisicode'];
+  }
+}
+
+class Divisi {
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int divisiId;
+  String divisicode;
+  String divisiDescname;
+  String refPopcode;
+  String gisAreatype;
+  String divisiIntegrityCode;
+
+  Divisi({this.insertByDevicecode,
+    this.updateByDevicecode,
+    this.divisiId,
+    this.divisicode,
+    this.divisiDescname,
+    this.refPopcode,
+    this.gisAreatype,
+    this.divisiIntegrityCode});
+
+  Divisi.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    divisiId = json['divisi_id'];
+    divisicode = json['divisicode'];
+    divisiDescname = json['divisi_descname'];
+    refPopcode = json['ref_popcode'];
+    gisAreatype = json['gisAreatype'];
+    divisiIntegrityCode = json['divisiIntegrityCode'];
+  }
+}
+
+class Tph {
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int tphId;
+  String tphcode;
+  int refAncakid;
+  String tphDescname;
+  String popcode;
+  String divisicode;
+  String blockcode;
+  String ancakcode;
+  String longitude;
+  String latitude;
+  String tphIntegrityCode;
+
+  Tph(
+      {this.insertByDevicecode,
+        this.updateByDevicecode,
+        this.tphId,
+        this.tphcode,
+        this.refAncakid,
+        this.tphDescname,
+        this.popcode,
+        this.divisicode,
+        this.blockcode,
+        this.ancakcode,
+        this.longitude,
+        this.latitude,
+        this.tphIntegrityCode});
+
+  Tph.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    tphId = json['tphId'];
+    tphcode = json['tphcode'];
+    refAncakid = json['refAncakid'];
+    tphDescname = json['tphDescname'];
+    popcode = json['popcode'];
+    divisicode = json['divisicode'];
+    blockcode = json['blockcode'];
+    ancakcode = json['ancakcode'];
+    longitude = json['longitude'];
+    latitude = json['latitude'];
+    tphIntegrityCode = json['tphIntegrityCode'];
+  }
+}
+
+class Pop{
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int popId;
+  String popcode;
+  String popname;
+  String popDescname;
+  String gisAreatype;
+  String gisAreajson;
+  String refCompanycode;
+
+  Pop(
+      {this.insertByDevicecode,
+        this.updateByDevicecode,
+        this.popId,
+        this.popcode,
+        this.popname,
+        this.popDescname,
+        this.gisAreatype,
+        this.gisAreajson,
+        this.refCompanycode});
+
+  Pop.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    popId = json['popId'];
+    popcode = json['popcode'];
+    popname = json['popname'];
+    popDescname = json['popDescname'];
+    gisAreatype = json['gisAreatype'];
+    gisAreajson = json['gisAreajson'];
+    refCompanycode = json['refCompanycode'];
+  }
+}
+
+class Alatberat {
+  String insertByDevicecode;
+  String updateByDevicecode;
+  AlatberatUnionFieldCode alatberatUnionFieldCode;
+  String alatBeratName;
+  String alatBeratDesc;
+  String isactive;
+  String typeAlatBerat;
+
+  Alatberat({this.insertByDevicecode,
+    this.updateByDevicecode,
+    this.alatberatUnionFieldCode,
+    this.alatBeratName,
+    this.alatBeratDesc,
+    this.isactive,
+    this.typeAlatBerat});
+
+  Alatberat.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    alatberatUnionFieldCode = json['alatberatUnionFieldCode'] != null
+        ? new AlatberatUnionFieldCode.fromJson(json['alatberatUnionFieldCode'])
+        : null;
+    alatBeratName = json['alatBeratName'];
+    alatBeratDesc = json['alatBeratDesc'];
+    isactive = json['isactive'];
+    typeAlatBerat = json['typeAlatBerat'];
+  }
+}
+
+class AlatberatUnionFieldCode {
+  String refCompanycode;
+  String refPopCode;
+  String alatBeratCode;
+
+  AlatberatUnionFieldCode(
+      {this.refCompanycode, this.refPopCode, this.alatBeratCode});
+
+  AlatberatUnionFieldCode.fromJson(Map<String, dynamic> json) {
+    refCompanycode = json['refCompanycode'];
+    refPopCode = json['refPopCode'];
+    alatBeratCode = json['alatBeratCode'];
+  }
+}
+
+
+
+
+
+
+
 
