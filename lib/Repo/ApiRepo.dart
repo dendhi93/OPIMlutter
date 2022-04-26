@@ -2,6 +2,7 @@
 import 'package:opim_flutter/Model/response/ResponseLoginModel.dart';
 import 'package:opim_flutter/Utils/ConstantsVar.dart';
 import 'package:http/http.dart' as http;
+import 'dart:developer';
 
 class ApiRepo{
 
@@ -19,13 +20,13 @@ class ApiRepo{
         body: PostLogin().loginToJson(_postLogin)
     ).timeout(Duration(seconds: 100));
 
-    print(responseLogin.body);
+    log(responseLogin.body);
     return responseLogin.body;
   }
 
   Future<String> getAllMasterData(String getToken) async{
     String urlAllMasterData = ConstantsVar.urlApi +'master010/allmaster';
-    print('url $Uri.parse(urlAllMasterData)');
+    print(Uri.parse(urlAllMasterData));
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -40,7 +41,7 @@ class ApiRepo{
           throw new Exception("time out");
         });
 
-    print(responseAllMaster.body);
+    log(responseAllMaster.body);
     return responseAllMaster.body;
   }
 

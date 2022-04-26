@@ -123,7 +123,7 @@ class Jalan {
   String popcode;
   String divisicode;
   String blockcode;
-  KondisiJalanItem trcLaporJalan;
+  TrcLaporJalan trcLaporJalan;
 
   Jalan({this.insertByDevicecode, this.updateByDevicecode, this.jalanId, this.jalancode, this.refBlockid, this.jalanDesc, this.gisAreatype, this.gisAreajson, this.jalanIntegrityCode, this.grade, this.popcode, this.divisicode, this.blockcode, this.trcLaporJalan});
 
@@ -141,11 +141,13 @@ class Jalan {
     popcode = json['popcode'];
     divisicode = json['divisicode'];
     blockcode = json['blockcode'];
-    trcLaporJalan = json['trcLaporJalan'];
+    trcLaporJalan = json['trcLaporJalan'] != null
+        ? new TrcLaporJalan.fromJson(json['trcLaporJalan'])
+        : null;
   }
 }
 
-class KondisiJalanItem{
+class TrcLaporJalan{
   int id;
   int jalanId;
   String jalanCode;
@@ -156,8 +158,8 @@ class KondisiJalanItem{
   String jalanNotes;
   String perbaikanJalan;
   String perbaikanJembatan;
-  Double latitudeAction;
-  Double longitudeAction;
+  double latitudeAction;
+  double longitudeAction;
   String userActLapor;
   String userActLaporName;
   String userActLaporJabatan;
@@ -165,12 +167,12 @@ class KondisiJalanItem{
   String foto2;
   String foto3;
 
-  KondisiJalanItem({this.id, this.jalanId, this.jalanCode, this.blockCode, this.grade, this.divisiCode,
+  TrcLaporJalan({this.id, this.jalanId, this.jalanCode, this.blockCode, this.grade, this.divisiCode,
   this.laporDate, this.jalanNotes, this.perbaikanJalan, this.perbaikanJembatan, this.latitudeAction, this.longitudeAction
   ,this.userActLapor, this.userActLaporName, this.userActLaporJabatan, this.foto1, this.foto2, this.foto3
   });
 
-  KondisiJalanItem.fromJson(Map<String, dynamic> json) {
+  TrcLaporJalan.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     jalanId = json['jalanId'];
     jalanCode = json['jalanCode'];
