@@ -28,15 +28,14 @@ class Data{
   List<Pop> pop;
   List<Alatberat> alatberat;
   List<Mandorperawatan> mandorperawatan;
-  // List<Weightbridge> weightbridge;
-  // List<Company> company;
-   List<Block> block;
+  List<Weightbridge> weightbridge;
+  List<Company> company;
+  List<Block> block;
   List<Ketuateam> ketuateam;
   // List<ActivityList> activityList;
-  // List<Tenagakerja> tenagakerja;
+  List<Tenagakerja> tenagakerja;
 
-  // Data({this.jalan, this.kendaraan, this.mandor, this.tipealatberat, this.ancak, this.checkerperawatan, this.divisi, this.tph, this.pop, this.alatberat, this.mandorperawatan, this.weightbridge, this.company, this.block, this.ketuateam, this.activityList, this.tenagakerja});
-  Data({this.jalan, this.kendaraan, this.mandor, this.tipealatberat, this.ancak, this.checkerperawatan, this.divisi, this.tph, this.pop, this.alatberat, this.mandorperawatan, this.block, this.ketuateam});
+  Data({this.jalan, this.kendaraan, this.mandor, this.tipealatberat, this.ancak, this.checkerperawatan, this.divisi, this.tph, this.pop, this.alatberat, this.mandorperawatan, this.weightbridge, this.company, this.block, this.ketuateam, this.tenagakerja});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['jalan'] != null) {
@@ -83,30 +82,30 @@ class Data{
       mandorperawatan = <Mandorperawatan>[];
       json['mandorperawatan'].forEach((v) { mandorperawatan.add(new Mandorperawatan.fromJson(v)); });
     }
-    // if (json['weightbridge'] != null) {
-    //   weightbridge = <Weightbridge>[];
-    //   json['weightbridge'].forEach((v) { weightbridge!.add(new Weightbridge.fromJson(v)); });
-    // }
-    // if (json['company'] != null) {
-    //   company = <Company>[];
-    //   json['company'].forEach((v) { company!.add(new Company.fromJson(v)); });
-    // }
-    // if (json['block'] != null) {
-    //   block = <Block>[];
-    //   json['block'].forEach((v) { block!.add(new Block.fromJson(v)); });
-    // }
-    // if (json['ketuateam'] != null) {
-    //   ketuateam = <Ketuateam>[];
-    //   json['ketuateam'].forEach((v) { ketuateam!.add(new Ketuateam.fromJson(v)); });
-    // }
+    if (json['weightbridge'] != null) {
+      weightbridge = <Weightbridge>[];
+      json['weightbridge'].forEach((v) { weightbridge.add(new Weightbridge.fromJson(v)); });
+    }
+    if (json['company'] != null) {
+      company = <Company>[];
+      json['company'].forEach((v) { company.add(new Company.fromJson(v)); });
+    }
+    if (json['block'] != null) {
+      block = <Block>[];
+      json['block'].forEach((v) { block.add(new Block.fromJson(v)); });
+    }
+    if (json['ketuateam'] != null) {
+      ketuateam = <Ketuateam>[];
+      json['ketuateam'].forEach((v) { ketuateam.add(new Ketuateam.fromJson(v)); });
+    }
     // if (json['activityList'] != null) {
     //   activityList = <ActivityList>[];
     //   json['activityList'].forEach((v) { activityList!.add(new ActivityList.fromJson(v)); });
     // }
-    // if (json['tenagakerja'] != null) {
-    //   tenagakerja = <Tenagakerja>[];
-    //   json['tenagakerja'].forEach((v) { tenagakerja!.add(new Tenagakerja.fromJson(v)); });
-    // }
+    if (json['tenagakerja'] != null) {
+      tenagakerja = <Tenagakerja>[];
+      json['tenagakerja'].forEach((v) { tenagakerja.add(new Tenagakerja.fromJson(v)); });
+    }
   }
 }
 
@@ -666,6 +665,100 @@ class Ketuateam{
     isActive = json['isActive'];
   }
 }
+
+class Weightbridge{
+  int weightbridgeId;
+  String weightbridgeCode;
+  String refFactorycode;
+  String popcode;
+  int isActive;
+
+  Weightbridge(
+      {this.weightbridgeId,
+        this.weightbridgeCode,
+        this.refFactorycode,
+        this.popcode,
+        this.isActive});
+
+  Weightbridge.fromJson(Map<String, dynamic> json) {
+    weightbridgeId = json['weightbridgeId'];
+    weightbridgeCode = json['weightbridgeCode'];
+    refFactorycode = json['refFactorycode'];
+    popcode = json['popcode'];
+    isActive = json['isActive'];
+  }
+}
+
+class Company{
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int rcIdx;
+  String companycode;
+  String companyname;
+  String companydesc;
+
+  Company(
+      {this.insertByDevicecode,
+        this.updateByDevicecode,
+        this.rcIdx,
+        this.companycode,
+        this.companyname,
+        this.companydesc});
+
+  Company.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    rcIdx = json['rcIdx'];
+    companycode = json['companycode'];
+    companyname = json['companyname'];
+    companydesc = json['companydesc'];
+  }
+}
+
+class Tenagakerja {
+  String insertByDevicecode;
+  String updateByDevicecode;
+  int tenagakerjaId;
+  String tenagakerjaCode;
+  String namaTenagakerja;
+  int refKetuaTeamId;
+  String ketuaTeamCode;
+  String isActive;
+  String companycode;
+  String popcode;
+  String divisicode;
+
+  Tenagakerja({this.insertByDevicecode,
+    this.updateByDevicecode,
+    this.tenagakerjaId,
+    this.tenagakerjaCode,
+    this.namaTenagakerja,
+    this.refKetuaTeamId,
+    this.ketuaTeamCode,
+    this.isActive,
+    this.companycode,
+    this.popcode,
+    this.divisicode});
+
+  Tenagakerja.fromJson(Map<String, dynamic> json) {
+    insertByDevicecode = json['insertByDevicecode'];
+    updateByDevicecode = json['updateByDevicecode'];
+    tenagakerjaId = json['tenagakerjaId'];
+    tenagakerjaCode = json['tenagakerjaCode'];
+    namaTenagakerja = json['namaTenagakerja'];
+    refKetuaTeamId = json['refKetuaTeamId'];
+    ketuaTeamCode = json['ketuaTeamCode'];
+    isActive = json['isActive'];
+    companycode = json['companycode'];
+    popcode = json['popcode'];
+    divisicode = json['divisicode'];
+  }
+}
+
+
+
+
+
 
 
 
