@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
 import 'package:opim_flutter/Model/database/AppDatabase.dart';
+import 'package:opim_flutter/Model/database/entity/MBlock.dart';
 import 'package:opim_flutter/Model/database/entity/MUser.dart';
 import 'package:opim_flutter/Model/response/ResponseLoginModel.dart';
 import 'package:opim_flutter/Model/response/ResponseMasterData.dart';
@@ -11,18 +12,15 @@ import 'package:opim_flutter/Repo/ApiRepo.dart';
 import 'package:opim_flutter/Utils/ConstantsVar.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
 import 'package:intl/intl.dart';
+import 'dart:developer';
 
 class LoginPresenter implements LoginInterfaceImpl{
   LoginInterfaceView view;
   LoginPresenter(this.view);
   final database = $FloorAppDatabase.databaseBuilder('opim_database.db').build();
   ApiRepo _apiRepo = ApiRepo();
-  String responseStatus = "";
+  String responseLoginStatus = "";
   String responseStatusAllMaster = "";
-  String firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, nikUser;
-  String popName, division, imei, lastUpload, lastSync, userToken, companyCode, passwordUser;
-  MUser mUser;
-  int maxId = 1;
   DateTime now = DateTime.now();
 
   @override
@@ -46,9 +44,17 @@ class LoginPresenter implements LoginInterfaceImpl{
     //todo request api
     view?.loadingBar(ConstantsVar.showLoadingBar);
     try{
+      String firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, nikUser;
+      String popName, division, imei, lastUpload, lastSync, userToken, companyCode, passwordUser;
+      String divisionId, blockName, divisionCode, companyCodeForBlock, popCode, blockCode;
+      int maxId = 1;
+      int blockId = 1;
+      MUser mUser;
+      MBlock mBlock;
+      List<Block> listResponseBlock = [];
       _apiRepo.getLogin(un.trim(), pwd.trim()).then((value) => {
-        responseStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
-        if(responseStatus == ConstantsVar.successStatusCode){
+        responseLoginStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
+        if(responseLoginStatus == ConstantsVar.successStatusCode){
             nikUser = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.usercode,
             firstName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.firstname,
             lastName = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.lastname,
@@ -78,14 +84,20 @@ class LoginPresenter implements LoginInterfaceImpl{
               _apiRepo.getAllMasterData(userToken).then((value) => {
                   responseStatusAllMaster = ResponseMasterData.fromJson(jsonDecode(value)).status,
                   if(responseStatusAllMaster == ConstantsVar.successStringStatus){
+                    //put all master in here
+                    listResponseBlock = ResponseMasterData.fromJson(jsonDecode(value)).data.block,
+                      for(final e in listResponseBlock){
+                        mBlock = MBlock(e.blockid, e.refDivisiId.toString(), e.blokdescname, e.divisicode, e.companycode, e.popcode, e.blockcode),
+                        onValueDB.blockDAO.insertBlock(mBlock),
+                      },
                       view?.loadingBar(ConstantsVar.hideLoadingBar),
                       view?.goToHome()
                   }
               });
             }),
-        }else if(responseStatus == ConstantsVar.failedStatusCode){
+        }else if(responseLoginStatus == ConstantsVar.failedStatusCode){
           view?.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
-        }else if(responseStatus == ConstantsVar.errorStatusCode){
+        }else if(responseLoginStatus == ConstantsVar.errorStatusCode){
           view?.messageLogin(ConstantsVar.errorStatusMessage)
         },
       });
