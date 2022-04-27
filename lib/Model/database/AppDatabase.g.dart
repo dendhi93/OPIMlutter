@@ -66,6 +66,8 @@ class _$AppDatabase extends AppDatabase {
 
   MDivisiDao _divisiDAOInstance;
 
+  MAncakDao _ancakDAOInstance;
+
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
@@ -89,6 +91,8 @@ class _$AppDatabase extends AppDatabase {
             'CREATE TABLE IF NOT EXISTS `MBlock` (`blockId` INTEGER PRIMARY KEY AUTOINCREMENT, `divisionId` TEXT, `blockName` TEXT, `divisionCode` TEXT, `companyCode` TEXT, `popCode` TEXT, `blockCode` TEXT)');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `MDivisi` (`divisionId` INTEGER PRIMARY KEY AUTOINCREMENT, `divisionName` TEXT, `popCode` TEXT, `divisionCode` TEXT)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `MAncak` (`ancakId` INTEGER PRIMARY KEY AUTOINCREMENT, `blockId` TEXT, `ancakName` TEXT, `blockCode` TEXT, `popCode` TEXT, `divisionCode` TEXT, `ancakCode` TEXT)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -109,6 +113,11 @@ class _$AppDatabase extends AppDatabase {
   @override
   MDivisiDao get divisiDAO {
     return _divisiDAOInstance ??= _$MDivisiDao(database, changeListener);
+  }
+
+  @override
+  MAncakDao get ancakDAO {
+    return _ancakDAOInstance ??= _$MAncakDao(database, changeListener);
   }
 }
 
@@ -281,5 +290,32 @@ class _$MDivisiDao extends MDivisiDao {
   @override
   Future<void> insertDivisi(MDivisi division) async {
     await _mDivisiInsertionAdapter.insert(division, OnConflictStrategy.abort);
+  }
+}
+
+class _$MAncakDao extends MAncakDao {
+  _$MAncakDao(this.database, this.changeListener)
+      : _mAncakInsertionAdapter = InsertionAdapter(
+            database,
+            'MAncak',
+            (MAncak item) => <String, Object>{
+                  'ancakId': item.ancakId,
+                  'blockId': item.blockId,
+                  'ancakName': item.ancakName,
+                  'blockCode': item.blockCode,
+                  'popCode': item.popCode,
+                  'divisionCode': item.divisionCode,
+                  'ancakCode': item.ancakCode
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final InsertionAdapter<MAncak> _mAncakInsertionAdapter;
+
+  @override
+  Future<void> insertAncak(MAncak ancak) async {
+    await _mAncakInsertionAdapter.insert(ancak, OnConflictStrategy.abort);
   }
 }
