@@ -66,7 +66,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            padding: const EdgeInsets.only(left: 25.0, top: 40.0),
+                            padding: const EdgeInsets.only(left: 25.0, top: 50.0),
                             child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
                           ),
                           Container(
@@ -81,7 +81,8 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Container(
-                            padding: const EdgeInsets.only(left: 65.0, bottom: 17.0),
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.only(left: 58.0, top: 19.0),
                             child: Icon(
                               Icons.shopping_bag,
                               color: Colors.white,
@@ -93,7 +94,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                padding: const EdgeInsets.only(right: 25.0, top: 40.0),
+                                padding: const EdgeInsets.only(right: 25.0, top: 50.0),
                                 child: Text('POP', style:TextStyle(fontSize: 18, color: Colors.white)),
                               ),
                               Container(
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                 ),
 
                 Container(
-                  margin: EdgeInsets.only(top: 0.0, left: 25.0,right: 25.0, bottom: 127.0),
+                  margin: EdgeInsets.only(top: 0.0, left: 25.0,right: 25.0, bottom: 167.0),
                   child: Divider(color: Colors.white, height: 2),
                 ),
               ],
@@ -124,9 +125,8 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 230.0)),
+              Padding(padding: EdgeInsets.only(top: 210.0)),
               Text('Pilih Menu', style:TextStyle(fontSize: 18, color: Colors.black)),
-              Padding(padding: EdgeInsets.only(top: 5.0)),
               Expanded(child:
                     Container(child:
                         GridView.count(
@@ -167,7 +167,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
 
   get content => Container(
     padding: const EdgeInsets.all(12.0),
-    margin: EdgeInsets.only(top: 120.0, left: 25.0,right: 25.0, bottom: 183.0),
+    margin: EdgeInsets.only(top: 150.0, left: 25.0,right: 25.0, bottom: 315.0),
     decoration: new BoxDecoration(
         color: HexColor("#F0F8FF"),
         borderRadius: new BorderRadius.only(
@@ -192,7 +192,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
             children: <Widget>[
               Text('Informasi', style:TextStyle(fontSize: 18, color: Colors.black)),
               Text('Informasi terbaru untukmu ada disini', style:TextStyle(fontSize: 15, color: Colors.black)),
-              Padding(padding: EdgeInsets.only(top: 5.0)),
+              Padding(padding: EdgeInsets.only(top: 15.0)),
               listRestan,
               Padding(padding: EdgeInsets.only(top: 5.0)),
               listLastLogin,
