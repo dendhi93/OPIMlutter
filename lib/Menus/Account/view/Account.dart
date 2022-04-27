@@ -59,13 +59,13 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top: 60.0)),
+                      Padding(padding: EdgeInsets.only(top: 80.0)),
                       Image.asset('assets/images/ic_user.png', width: 90, height: 80,),
-                      Padding(padding: EdgeInsets.only(top: 20.0)),
+                      Padding(padding: EdgeInsets.only(top: 23.0)),
                       Text(nameUser, style:TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-                      Padding(padding: EdgeInsets.only(top: 10.0)),
-                      Text(nikUser, style:TextStyle(fontSize: 15, color: Colors.white)),
                       Padding(padding: EdgeInsets.only(top: 14.0)),
+                      Text(nikUser, style:TextStyle(fontSize: 15, color: Colors.white)),
+                      Padding(padding: EdgeInsets.only(top: 18.0)),
                       Container(
                         width: 130,
                         height: 28,
@@ -82,13 +82,13 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
                           child: Text(userRole, style:TextStyle(fontSize: 15, color: Colors.white)),
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(top: 15.0)),
+                      Padding(padding: EdgeInsets.only(top: 22.0)),
                       Text(versionApps, style:TextStyle(fontSize: 15, color: Colors.white)),
                     ],
                   ),
               ),
             ),
-        ),flex: 4,),
+        ),flex: 3,),
         Expanded(child: Container(
           alignment: Alignment.topLeft,
           color: Colors.white,
@@ -102,7 +102,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
                 imeiColumn,
                 lastLoginColumn,
                 registerDateColumn,
-                Padding(padding: EdgeInsets.only(top: 20.0)),
+                Padding(padding: EdgeInsets.only(top: 10.0)),
                 GestureDetector(
                     onTap: (){
                         _opimUtils.showYesNoActionDialog("Confirmation","Are you sure wanto to exit application ?", context, this);
@@ -133,7 +133,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('POP ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text('POP ', style:TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
@@ -151,7 +151,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('Divisi ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text('Divisi ', style:TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
@@ -169,7 +169,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('IMEI ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text('IMEI ', style:TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
@@ -187,7 +187,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('Terakhir Login ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text('Terakhir Login ', style:TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
@@ -205,7 +205,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
       Padding(padding: EdgeInsets.only(top: 10.0)),
       Container(
         alignment: Alignment.topLeft,
-        child: Text('Tanggal Registrasi ', style:TextStyle(fontSize: 14, color: Colors.black)),
+        child: Text('Tanggal Registrasi ', style:TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       Padding(padding: EdgeInsets.only(top: 5.0)),
       Container(
