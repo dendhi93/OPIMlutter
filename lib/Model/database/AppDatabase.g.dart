@@ -61,7 +61,10 @@ class _$AppDatabase extends AppDatabase {
   }
 
   MUserDao _userDAOInstance;
+
   MBlockDao _blockDAOInstance;
+
+  MDivisiDao _divisiDAOInstance;
 
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback callback]) async {
@@ -84,6 +87,8 @@ class _$AppDatabase extends AppDatabase {
             'CREATE TABLE IF NOT EXISTS `MUser` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `nik` TEXT, `firstName` TEXT, `lastName` TEXT, `roleName` TEXT, `roleCode` TEXT, `lastLoggedIn` TEXT, `registrationDate` TEXT, `popid` TEXT, `pop` TEXT, `division` TEXT, `imei` TEXT, `lastUpload` TEXT, `lastSync` TEXT, `userToken` TEXT, `companyCode` TEXT, `passwordUser` TEXT)');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `MBlock` (`blockId` INTEGER PRIMARY KEY AUTOINCREMENT, `divisionId` TEXT, `blockName` TEXT, `divisionCode` TEXT, `companyCode` TEXT, `popCode` TEXT, `blockCode` TEXT)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `MDivisi` (`divisionId` INTEGER PRIMARY KEY AUTOINCREMENT, `divisionName` TEXT, `popCode` TEXT, `divisionCode` TEXT)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -99,6 +104,11 @@ class _$AppDatabase extends AppDatabase {
   @override
   MBlockDao get blockDAO {
     return _blockDAOInstance ??= _$MBlockDao(database, changeListener);
+  }
+
+  @override
+  MDivisiDao get divisiDAO {
+    return _divisiDAOInstance ??= _$MDivisiDao(database, changeListener);
   }
 }
 
@@ -247,5 +257,29 @@ class _$MBlockDao extends MBlockDao {
   @override
   Future<void> insertBlock(MBlock block) async {
     await _mBlockInsertionAdapter.insert(block, OnConflictStrategy.abort);
+  }
+}
+
+class _$MDivisiDao extends MDivisiDao {
+  _$MDivisiDao(this.database, this.changeListener)
+      : _mDivisiInsertionAdapter = InsertionAdapter(
+            database,
+            'MDivisi',
+            (MDivisi item) => <String, Object>{
+                  'divisionId': item.divisionId,
+                  'divisionName': item.divisionName,
+                  'popCode': item.popCode,
+                  'divisionCode': item.divisionCode
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final InsertionAdapter<MDivisi> _mDivisiInsertionAdapter;
+
+  @override
+  Future<void> insertDivisi(MDivisi division) async {
+    await _mDivisiInsertionAdapter.insert(division, OnConflictStrategy.abort);
   }
 }
