@@ -83,8 +83,9 @@ class OpimUtils{
                   children: <Widget>[
                     Center(
                       child: Column(children: [
+                        SizedBox(height: 30,),
                         CircularProgressIndicator(),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 50,),
                         Text(message,style: TextStyle(color: Colors.green),)
                       ]),
                     )

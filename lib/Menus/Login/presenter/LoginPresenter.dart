@@ -6,6 +6,7 @@ import 'package:opim_flutter/Menus/Login/contract/LoginInterface.dart';
 import 'package:opim_flutter/Model/database/AppDatabase.dart';
 import 'package:opim_flutter/Model/database/entity/MBlock.dart';
 import 'package:opim_flutter/Model/database/entity/MUser.dart';
+import 'package:opim_flutter/Model/database/entity/Mdivisi.dart';
 import 'package:opim_flutter/Model/response/ResponseLoginModel.dart';
 import 'package:opim_flutter/Model/response/ResponseMasterData.dart';
 import 'package:opim_flutter/Repo/ApiRepo.dart';
@@ -21,6 +22,8 @@ class LoginPresenter implements LoginInterfaceImpl{
   ApiRepo _apiRepo = ApiRepo();
   String responseLoginStatus = "";
   String responseStatusAllMaster = "";
+  String userToken = "";
+  AppDatabase _appDatabase;
   DateTime now = DateTime.now();
 
   @override
@@ -28,12 +31,13 @@ class LoginPresenter implements LoginInterfaceImpl{
 
   @override
   void initLogin() {
-    String userToken = "";
     database.then((onValueDb) {
       onValueDb.userDAO.findAllUser().then((onValueQuery) => {
           if(onValueQuery != null){
-            userToken = onValueQuery[0].userToken,
-             if(userToken != "")view?.goToHome(),
+            if(onValueQuery.length > 0){
+              userToken = onValueQuery[0].userToken,
+              if(userToken != "")view?.goToHome(),
+            }
           }
       });
     });
@@ -45,13 +49,9 @@ class LoginPresenter implements LoginInterfaceImpl{
     view?.loadingBar(ConstantsVar.showLoadingBar);
     try{
       String firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, nikUser;
-      String popName, division, imei, lastUpload, lastSync, userToken, companyCode, passwordUser;
-      String divisionId, blockName, divisionCode, companyCodeForBlock, popCode, blockCode;
+      String popName, division, imei, lastUpload, lastSync, companyCode, passwordUser;
       int maxId = 1;
-      int blockId = 1;
       MUser mUser;
-      MBlock mBlock;
-      List<Block> listResponseBlock = [];
       _apiRepo.getLogin(un.trim(), pwd.trim()).then((value) => {
         responseLoginStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
         if(responseLoginStatus == ConstantsVar.successStatusCode){
@@ -72,6 +72,7 @@ class LoginPresenter implements LoginInterfaceImpl{
             companyCode = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.refCompanycode,
             passwordUser = pwd.trim(),
             database.then((onValueDB) {
+              _appDatabase = onValueDB;
               onValueDB.userDAO.getMaxUser().then((onValueMax) => {
                   if(onValueMax != null){
                     maxId = onValueMax.id + 1
@@ -81,19 +82,7 @@ class LoginPresenter implements LoginInterfaceImpl{
               onValueDB.userDAO.deleteAllUser();
               onValueDB.userDAO.insertUser(mUser);
 
-              _apiRepo.getAllMasterData(userToken).then((value) => {
-                  responseStatusAllMaster = ResponseMasterData.fromJson(jsonDecode(value)).status,
-                  if(responseStatusAllMaster == ConstantsVar.successStringStatus){
-                    //put all master in here
-                    listResponseBlock = ResponseMasterData.fromJson(jsonDecode(value)).data.block,
-                      for(final e in listResponseBlock){
-                        mBlock = MBlock(e.blockid, e.refDivisiId.toString(), e.blokdescname, e.divisicode, e.companycode, e.popcode, e.blockcode),
-                        onValueDB.blockDAO.insertBlock(mBlock),
-                      },
-                      view?.loadingBar(ConstantsVar.hideLoadingBar),
-                      view?.goToHome()
-                  }
-              });
+              getAllMaster();
             }),
         }else if(responseLoginStatus == ConstantsVar.failedStatusCode){
           view?.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
@@ -111,6 +100,38 @@ class LoginPresenter implements LoginInterfaceImpl{
   void validateConn(BuildContext context, String un, String pwd) {
     OpimUtils.checkConnection().then((isConnected) => {
       isConnected ? submitLogin(un, pwd) : view?.onAlertDialog(ConstantsVar.noConnectionTitle, ConstantsVar.noConnectionMessage, context)
+    });
+  }
+
+  void getAllMaster(){
+    MBlock mBlock;
+    MDivisi mDivisi;
+    List<Block> listResponseBlock = [];
+    List<Divisi> listResponseDivision = [];
+    _apiRepo.getAllMasterData(userToken).then((value) => {
+      responseStatusAllMaster = ResponseMasterData.fromJson(jsonDecode(value)).status,
+      if(responseStatusAllMaster == ConstantsVar.successStringStatus){
+        //put all master in here
+        listResponseBlock = ResponseMasterData.fromJson(jsonDecode(value)).data.block,
+        listResponseDivision = ResponseMasterData.fromJson(jsonDecode(value)).data.divisi,
+        if(_appDatabase != null){
+            if(listResponseBlock != null){
+              for(final block in listResponseBlock){
+                mBlock = MBlock(block.blockid, block.refDivisiId.toString(), block.blokdescname, block.divisicode, block.companycode, block.popcode, block.blockcode),
+                _appDatabase.blockDAO.insertBlock(mBlock),
+              },
+            },
+
+            if(listResponseDivision != null){
+              for(final division in listResponseDivision){
+                  mDivisi = MDivisi(division.divisiId, division.divisiDescname, division.divisicode, division.refPopcode),
+                  _appDatabase.divisiDAO.insertDivisi(mDivisi),
+              }
+            }
+        },
+        view?.loadingBar(ConstantsVar.hideLoadingBar),
+        view?.goToHome()
+      }
     });
   }
 }
