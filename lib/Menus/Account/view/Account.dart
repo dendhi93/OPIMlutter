@@ -48,14 +48,15 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
       children: <Widget>[
         Expanded(child: Container(
            color: Colors.green,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/ic_tse_bg.png"),
-                  fit: BoxFit.cover,
+            child: SingleChildScrollView(
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/ic_tse_bg.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: Center(
+                child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
@@ -86,6 +87,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
                       Text(versionApps, style:TextStyle(fontSize: 15, color: Colors.white)),
                     ],
                   ),
+                ),
               ),
             ),
         ),flex: 3,),
