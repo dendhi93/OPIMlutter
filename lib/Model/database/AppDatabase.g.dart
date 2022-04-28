@@ -68,6 +68,8 @@ class _$AppDatabase extends AppDatabase {
 
   MAncakDao _ancakDAOInstance;
 
+  MTphDao _tphDAOInstance;
+
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
@@ -93,6 +95,8 @@ class _$AppDatabase extends AppDatabase {
             'CREATE TABLE IF NOT EXISTS `MDivisi` (`divisionId` INTEGER PRIMARY KEY AUTOINCREMENT, `divisionName` TEXT, `popCode` TEXT, `divisionCode` TEXT)');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `MAncak` (`ancakId` INTEGER PRIMARY KEY AUTOINCREMENT, `blockId` TEXT, `ancakName` TEXT, `blockCode` TEXT, `popCode` TEXT, `divisionCode` TEXT, `ancakCode` TEXT)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `MTph` (`tphId` INTEGER PRIMARY KEY AUTOINCREMENT, `ancakId` TEXT, `tphName` TEXT, `longitude` TEXT, `latitude` TEXT, `ancakCode` TEXT, `popCode` TEXT, `divisionCode` TEXT, `tphCode` TEXT, `blockCode` TEXT, `tphIntegrityCode` TEXT)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -119,57 +123,37 @@ class _$AppDatabase extends AppDatabase {
   MAncakDao get ancakDAO {
     return _ancakDAOInstance ??= _$MAncakDao(database, changeListener);
   }
+
+  @override
+  MTphDao get tphDAO {
+    return _tphDAOInstance ??= _$MTphDao(database, changeListener);
+  }
 }
 
 class _$MUserDao extends MUserDao {
   _$MUserDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database, changeListener),
-        _mUserInsertionAdapter = InsertionAdapter(
+      : _mUserInsertionAdapter = InsertionAdapter(
             database,
             'MUser',
-                (MUser item) => <String, Object>{
-              'id': item.id,
-              'nik': item.nik,
-              'firstName': item.firstName,
-              'lastName': item.lastName,
-              'roleName': item.roleName,
-              'roleCode': item.roleCode,
-              'lastLoggedIn': item.lastLoggedIn,
-              'registrationDate': item.registrationDate,
-              'popid': item.popid,
-              'pop': item.pop,
-              'division': item.division,
-              'imei': item.imei,
-              'lastUpload': item.lastUpload,
-              'lastSync': item.lastSync,
-              'userToken': item.userToken,
-              'companyCode': item.companyCode,
-              'passwordUser': item.passwordUser
-            }, changeListener),
-        _mUserDeletionAdapter = DeletionAdapter(
-            database,
-            'MUser',
-            ['id'],
-                (MUser item) => <String, dynamic>{
-              'id': item.id,
-              'nik': item.nik,
-              'firstName': item.firstName,
-              'lastName': item.lastName,
-              'roleName': item.roleName,
-              'roleCode': item.roleCode,
-              'lastLoggedIn': item.lastLoggedIn,
-              'registrationDate': item.registrationDate,
-              'popid': item.popid,
-              'pop': item.pop,
-              'division': item.division,
-              'imei': item.imei,
-              'lastUpload': item.lastUpload,
-              'lastSync': item.lastSync,
-              'userToken': item.userToken,
-              'companyCode': item.companyCode,
-              'passwordUser': item.passwordUser
-            },
-            changeListener);
+            (MUser item) => <String, Object>{
+                  'id': item.id,
+                  'nik': item.nik,
+                  'firstName': item.firstName,
+                  'lastName': item.lastName,
+                  'roleName': item.roleName,
+                  'roleCode': item.roleCode,
+                  'lastLoggedIn': item.lastLoggedIn,
+                  'registrationDate': item.registrationDate,
+                  'popid': item.popid,
+                  'pop': item.pop,
+                  'division': item.division,
+                  'imei': item.imei,
+                  'lastUpload': item.lastUpload,
+                  'lastSync': item.lastSync,
+                  'userToken': item.userToken,
+                  'companyCode': item.companyCode,
+                  'passwordUser': item.passwordUser
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -177,69 +161,10 @@ class _$MUserDao extends MUserDao {
 
   final InsertionAdapter<MUser> _mUserInsertionAdapter;
 
-  final QueryAdapter _queryAdapter;
-
-  final DeletionAdapter<MUser> _mUserDeletionAdapter;
-
-  static final _mUserMapper = (Map<String, dynamic> row) => MUser(
-      row['id'] as int,
-      row['nik'] as String,
-      row['firstName'] as String,
-      row['lastName'] as String,
-      row['roleName'] as String,
-      row['roleCode'] as String,
-      row['lastLoggedIn'] as String,
-      row['registrationDate'] as String,
-      row['popid'] as String,
-      row['pop'] as String,
-      row['division'] as String,
-      row['imei'] as String,
-      row['lastUpload'] as String,
-      row['lastSync'] as String,
-      row['isLoggedIn'] as bool,
-      row['userToken'] as String,
-      row['companyCode'] as String,
-      row['passwordUser'] as String
-  );
-
   @override
   Future<void> insertUser(MUser user) async {
     await _mUserInsertionAdapter.insert(user, OnConflictStrategy.abort);
   }
-
-  @override
-  Stream<List<MUser>> fetchStreamDataUser() {
-    return _queryAdapter.queryListStream('SELECT * FROM MUser order by id desc',
-        mapper: _mUserMapper);
-  }
-
-  @override
-  Future<MUser> getMaxUser() {
-    return _queryAdapter.query('SELECT * FROM MUser order by id desc limit 1',
-        mapper: _mUserMapper);
-  }
-
-  @override
-  Future<int> deleteAll(List<MUser> list) {
-    return _mUserDeletionAdapter.deleteListAndReturnChangedRows(list);
-  }
-
-  @override
-  Future<void> updateUserLogIn(int id) async {
-    await _queryAdapter.queryNoReturn('update MUser set userToken="'""'" where id = ?',
-        arguments: <dynamic>[id]);
-  }
-
-  @override
-  Future<List<MUser>> findAllUser() {
-    return _queryAdapter.queryList('SELECT * FROM MUser', mapper: _mUserMapper);
-  }
-
-  @override
-  Future<void> deleteAllUser() async {
-    await _queryAdapter.query('delete from MUser', mapper:_mUserMapper);
-  }
-
 }
 
 class _$MBlockDao extends MBlockDao {
@@ -317,5 +242,36 @@ class _$MAncakDao extends MAncakDao {
   @override
   Future<void> insertAncak(MAncak ancak) async {
     await _mAncakInsertionAdapter.insert(ancak, OnConflictStrategy.abort);
+  }
+}
+
+class _$MTphDao extends MTphDao {
+  _$MTphDao(this.database, this.changeListener)
+      : _mTphInsertionAdapter = InsertionAdapter(
+            database,
+            'MTph',
+            (MTph item) => <String, Object>{
+                  'tphId': item.tphId,
+                  'ancakId': item.ancakId,
+                  'tphName': item.tphName,
+                  'longitude': item.longitude,
+                  'latitude': item.latitude,
+                  'ancakCode': item.ancakCode,
+                  'popCode': item.popCode,
+                  'divisionCode': item.divisionCode,
+                  'tphCode': item.tphCode,
+                  'blockCode': item.blockCode,
+                  'tphIntegrityCode': item.tphIntegrityCode
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final InsertionAdapter<MTph> _mTphInsertionAdapter;
+
+  @override
+  Future<void> insertTph(MTph tph) async {
+    await _mTphInsertionAdapter.insert(tph, OnConflictStrategy.abort);
   }
 }
