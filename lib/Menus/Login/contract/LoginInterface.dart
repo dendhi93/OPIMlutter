@@ -11,5 +11,6 @@ class LoginInterfaceView{
   void messageLogin(String message){}
   void onAlertDialog(String titleMsg, String titleContent, BuildContext context){}
   void goToHome(){}
+  void directToHome(){}
   void loadingBar(int typeLoading){}
 }

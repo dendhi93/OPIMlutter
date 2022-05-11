@@ -152,10 +152,14 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
 
   @override
   void goToHome() {
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder:
-            (context) => BottomNavAdapter()
-    ));
+    new Future.delayed(const Duration(seconds: 5), () {
+      loadingBar(ConstantsVar.hideLoadingBar);
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder:
+              (context) => BottomNavAdapter()
+          ));
+    });
+
     _loginPresenter.destroyLogin();
   }
 
@@ -171,5 +175,13 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
   @override
   void onAlertDialog(String titleMsg, String titleContent, BuildContext context)
    => _opimUtils.showNoActionDialog(titleMsg, titleContent, context);
+
+  @override
+  void directToHome() {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder:
+            (context) => BottomNavAdapter()
+        ));
+  }
 
 }

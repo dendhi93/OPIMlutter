@@ -21,4 +21,5 @@ class ConstantsVar{
   //dateFormat
   static String slashDateTimeFormat = "dd/MM/yyyy • HH:mm:ss";
   static String slashDateFormat = "dd/MM/yyyy";
+  static String yearStripDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 }
