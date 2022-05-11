@@ -154,7 +154,7 @@ class LoginPresenter implements LoginInterfaceImpl{
             _masterRepo.insertTph(mTph)
           }
         },
-        await new Future.delayed(const Duration(seconds: 10), () {
+        await new Future.delayed(const Duration(seconds: 5), () {
           view?.goToHome();
         }),
       }

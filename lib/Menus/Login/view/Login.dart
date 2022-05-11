@@ -180,5 +180,4 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
             (context) => BottomNavAdapter()
         ));
   }
-
 }
