@@ -152,14 +152,11 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
 
   @override
   void goToHome() {
-    new Future.delayed(const Duration(seconds: 5), () {
-      loadingBar(ConstantsVar.hideLoadingBar);
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder:
-              (context) => BottomNavAdapter()
-          ));
-    });
-
+    loadingBar(ConstantsVar.hideLoadingBar);
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder:
+            (context) => BottomNavAdapter()
+        ));
     _loginPresenter.destroyLogin();
   }
 

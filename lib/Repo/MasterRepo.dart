@@ -16,27 +16,27 @@ class MasterRepo{
     });
   }
 
-  void insertBlock(MBlock block){
+  void insertBlock(MBlock block) async{
     if(_appDatabase != null){
-      _appDatabase.blockDAO.insertBlock(block);
+      await _appDatabase.blockDAO.insertBlock(block);
     }
   }
 
-  void insertDivision(MDivisi division){
+  void insertDivision(MDivisi division) async{
     if(_appDatabase != null){
-      _appDatabase.divisiDAO.insertDivisi(division);
+      await _appDatabase.divisiDAO.insertDivisi(division);
     }
   }
 
-  void insertAncak(MAncak ancak){
+  void insertAncak(MAncak ancak) async{
     if(_appDatabase != null){
-      _appDatabase.ancakDAO.insertAncak(ancak);
+      await _appDatabase.ancakDAO.insertAncak(ancak);
     }
   }
 
-  void insertTph(MTph tph){
+  void insertTph(MTph tph) async {
     if(_appDatabase != null){
-      _appDatabase.tphDAO.insertTph(tph);
+      await _appDatabase.tphDAO.insertTph(tph);
     }
   }
 }

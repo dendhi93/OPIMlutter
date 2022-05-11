@@ -107,7 +107,7 @@ class LoginPresenter implements LoginInterfaceImpl{
     });
   }
 
-  void getAllMaster(){
+  void getAllMaster() {
     MBlock mBlock;
     MDivisi mDivisi;
     MAncak mAncak;
@@ -118,7 +118,7 @@ class LoginPresenter implements LoginInterfaceImpl{
     List<Tph> listResponseTph = [];
     _masterRepo.initMasterRepo();
 
-    _apiRepo.getAllMasterData(userToken).then((value) => {
+    _apiRepo.getAllMasterData(userToken).then((value) async => {
       responseStatusAllMaster = ResponseMasterData.fromJson(jsonDecode(value)).status,
       if(responseStatusAllMaster == ConstantsVar.successStringStatus){
         //put all master in here
@@ -154,8 +154,11 @@ class LoginPresenter implements LoginInterfaceImpl{
             _masterRepo.insertTph(mTph)
           }
         },
-        view?.goToHome()
+        await new Future.delayed(const Duration(seconds: 10), () {
+          view?.goToHome();
+        }),
       }
     });
   }
+
 }
