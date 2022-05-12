@@ -12,9 +12,10 @@ class HomePresenter implements HomeInterfaceImpl{
   void destroyHomeView() => homeView = null;
 
   @override
+  // ignore: missing_return
   MUser initViewData() {
-    database.then((onValueDb) => {
-        onValueDb.userDAO.findAllUser().then((valueQuery) => {
+    database.then((onValueDb) async => {
+        await onValueDb.userDAO.findAllUser().then((valueQuery) => {
             if(valueQuery != null){
               homeView?.resultView(valueQuery[valueQuery.length - 1]),
             }

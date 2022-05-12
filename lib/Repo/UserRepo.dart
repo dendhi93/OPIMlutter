@@ -12,18 +12,18 @@ class UserRepo{
     });
   }
 
-  void insertUser(MUser user){
+  void insertUser(MUser user) async{
     if(_appDatabase != null){
-      _appDatabase.userDAO.deleteAllUser();
-      _appDatabase.userDAO.insertUser(user);
+      await _appDatabase.userDAO.deleteAllUser();
+      await _appDatabase.userDAO.insertUser(user);
     }
   }
 
   Future<String> validateUserToken() async {
     String token = "";
-    database.then((onValueDb) {
+    database.then((onValueDb) async {
       _appDatabase = onValueDb;
-      onValueDb.userDAO.findAllUser().then((onValueQuery) => {
+       await onValueDb.userDAO.findAllUser().then((onValueQuery) => {
         if(onValueQuery != null){
           if(onValueQuery.length > 0){
             token = onValueQuery[0].userToken,
