@@ -6,22 +6,27 @@ import 'dart:developer';
 
 class ApiRepo{
 
-  Future<String> getLogin(String un, String pass) async{
+  Future<String> getLogin(String un, String pass, HideLoadingBar hideLoadingBar) async{
     //post using form data
-    String urlPostLogin = ConstantsVar.urlApi+'authenticate';
-    print(Uri.parse(urlPostLogin));
+    try{
+      String urlPostLogin = ConstantsVar.urlApi+'authenticate';
+      print(Uri.parse(urlPostLogin));
 
-    PostLogin _postLogin = PostLogin(username: un,password: pass, imei: "ANDROID");
-    print(PostLogin().loginToJson(_postLogin));
+      PostLogin _postLogin = PostLogin(username: un,password: pass, imei: "ANDROID");
+      print(PostLogin().loginToJson(_postLogin));
 
-    final http.Response responseLogin = await http
-        .post(Uri.parse(urlPostLogin),
-        headers: {'Content-Type': 'application/json',},
-        body: PostLogin().loginToJson(_postLogin)
-    ).timeout(Duration(seconds: 100));
+      final http.Response responseLogin = await http
+          .post(Uri.parse(urlPostLogin),
+          headers: {'Content-Type': 'application/json',},
+          body: PostLogin().loginToJson(_postLogin)
+      ).timeout(Duration(seconds: 100));
 
-    log(responseLogin.body);
-    return responseLogin.body;
+      log(responseLogin.body);
+      return responseLogin.body;
+    }catch(error){
+        hideLoadingBar.closeBar();
+        return "";
+    }
   }
 
   Future<String> getAllMasterData(String getToken) async{
@@ -45,4 +50,8 @@ class ApiRepo{
     return responseAllMaster.body;
   }
 
+}
+
+class HideLoadingBar{
+  void closeBar(){}
 }

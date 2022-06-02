@@ -18,7 +18,7 @@ import 'package:opim_flutter/Utils/OpimUtils.dart';
 import 'package:intl/intl.dart';
 import 'package:opim_flutter/Model/database/AppDatabase.dart';
 
-class LoginPresenter implements LoginInterfaceImpl{
+class LoginPresenter implements LoginInterfaceImpl, HideLoadingBar{
   LoginInterfaceView view;
   LoginPresenter(this.view);
   final database = $FloorAppDatabase.databaseBuilder('opim_database.db').build();
@@ -59,7 +59,7 @@ class LoginPresenter implements LoginInterfaceImpl{
       int maxId = 1;
       MUser mUser;
 
-      _apiRepo.getLogin(un.trim(), pwd.trim()).then((value) => {
+      _apiRepo.getLogin(un.trim(), pwd.trim(), this).then((value) => {
         responseLoginStatus = ResponseLoginModel.fromJson(jsonDecode(value)).status,
         if(responseLoginStatus == ConstantsVar.successStatusCode){
             nikUser = ResponseLoginModel.fromJson(jsonDecode(value)).data.userProfile.usercode,
@@ -89,8 +89,10 @@ class LoginPresenter implements LoginInterfaceImpl{
               getAllMaster();
             }),
         }else if(responseLoginStatus == ConstantsVar.failedStatusCode){
+          view?.loadingBar(ConstantsVar.hideLoadingBar),
           view?.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
         }else if(responseLoginStatus == ConstantsVar.errorStatusCode){
+          view?.loadingBar(ConstantsVar.hideLoadingBar),
           view?.messageLogin(ConstantsVar.errorStatusMessage)
         },
       });
@@ -160,5 +162,8 @@ class LoginPresenter implements LoginInterfaceImpl{
       }
     });
   }
+
+  @override
+  void closeBar() {view?.loadingBar(ConstantsVar.hideLoadingBar);}
 
 }
