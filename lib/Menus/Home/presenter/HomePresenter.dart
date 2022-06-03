@@ -1,5 +1,4 @@
 import 'package:opim_flutter/Menus/Home/contract/HomeInterface.dart';
-import 'package:opim_flutter/Model/database/entity/MUser.dart';
 
 import '../../../Model/database/AppDatabase.dart';
 
@@ -13,7 +12,7 @@ class HomePresenter implements HomeInterfaceImpl{
 
   @override
   // ignore: missing_return
-  MUser initViewData() {
+  void initViewData() {
     database.then((onValueDb) async => {
         await onValueDb.userDAO.findAllUser().then((valueQuery) => {
             if(valueQuery != null){
