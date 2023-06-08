@@ -60,7 +60,7 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top: 80.0)),
+                      Padding(padding: EdgeInsets.only(top: 50.0)),
                       Image.asset('assets/images/ic_user.png', width: 90, height: 80,),
                       Padding(padding: EdgeInsets.only(top: 23.0)),
                       Text(nameUser, style:TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),

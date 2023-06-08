@@ -66,39 +66,30 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            padding: const EdgeInsets.only(left: 25.0, top: 50.0),
+                            padding: const EdgeInsets.only(left: 20.0, top: 30.0),
                             child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
                           ),
                           Container(
-                            padding: const EdgeInsets.only(left: 25.0, top: 7.0),
+                            padding: const EdgeInsets.only(left: 20.0, top: 7.0),
                             child: Text(nameUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
                       ),
                       Expanded(child: Row(
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.only(left: 58.0, top: 19.0),
-                            child: Icon(
-                              Icons.shopping_bag,
-                              color: Colors.white,
-                              size: 45,
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(right: 10.0)),
+                          new Padding(padding: EdgeInsets.only(right: 40.0)),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                padding: const EdgeInsets.only(right: 25.0, top: 50.0),
+                                padding: const EdgeInsets.only(right: 20.0, top: 30.0),
                                 child: Text('POP', style:TextStyle(fontSize: 18, color: Colors.white)),
                               ),
                               Container(
-                                padding: const EdgeInsets.only(right: 25.0, top: 7.0),
+                                padding: const EdgeInsets.only(right: 20.0, top: 7.0),
                                 child: Text(popUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
                               ),
                             ],
@@ -125,7 +116,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 210.0)),
+              Padding(padding: EdgeInsets.only(top: 160.0)),
               Text('Pilih Menu', style:TextStyle(fontSize: 18, color: Colors.black)),
               Expanded(child:
                     Container(child:
@@ -161,13 +152,13 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
               ),
             ],
           ),
-      ),flex: 5,),
+      ),flex: 3,),
     ],
   );
 
   get content => Container(
     padding: const EdgeInsets.all(12.0),
-    margin: EdgeInsets.only(top: 150.0, left: 25.0,right: 25.0, bottom: 315.0),
+    margin: EdgeInsets.only(top: 100.0, left: 20.0,right: 20.0, bottom: 170.0),
     decoration: new BoxDecoration(
         color: HexColor("#F0F8FF"),
         borderRadius: new BorderRadius.only(
