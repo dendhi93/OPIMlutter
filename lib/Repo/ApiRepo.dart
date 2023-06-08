@@ -9,7 +9,7 @@ class ApiRepo{
   Future<String> getLogin(String un, String pass, HideLoadingBar hideLoadingBar) async{
     //post using form data
     try{
-      String urlPostLogin = ConstantsVar.urlApi+'authenticate';
+      String urlPostLogin = ConstantsVar.urlApi+'authandroid';
       print(Uri.parse(urlPostLogin));
 
       PostLogin _postLogin = PostLogin(username: un,password: pass, imei: "ANDROID");

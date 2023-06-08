@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 class ResponseMasterData{
   Data data;
@@ -571,8 +570,8 @@ class Block{
   String blokdescname;
   int refDivisiId;
   String majorPlantYear;
-  String planted;
-  String totalTrees;
+  double planted;
+  int totalTrees;
   String jenisBibit;
   String topography;
   String radius;
@@ -581,7 +580,7 @@ class Block{
   String divisicode;
   String grade;
   String gisAreatype;
-  String luasArea;
+  double luasArea;
   String gisAreajson;
   String blockIntegrityCode;
 
