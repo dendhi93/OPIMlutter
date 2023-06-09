@@ -192,7 +192,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                             HexColor("#8BF59C") : HexColor("#A9A9A9"),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
+                                     bottomRight: Radius.circular(15))
                             ),
                             elevation: 5,
                             margin: EdgeInsets.only(left: 5, right: 5, bottom: 15),
