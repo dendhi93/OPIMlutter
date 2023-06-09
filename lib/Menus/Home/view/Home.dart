@@ -116,7 +116,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 160.0)),
+              Padding(padding: EdgeInsets.only(top: 150.0)),
               Text('Pilih Menu', style:TextStyle(fontSize: 18, color: Colors.black)),
               Expanded(child:
                     Container(child:
@@ -124,8 +124,8 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           crossAxisCount: 2,
-                          crossAxisSpacing: 2.0,
-                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                          mainAxisSpacing: 6.0,
                           children: [
                             ...menus.map((i) =>
                                 GestureDetector(
@@ -134,7 +134,12 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                                   },
                                   child: Card(
                                         color:  i.last.toString() == "Cek Hasil Panen" ?
-                                        HexColor("#2F80ED") : HexColor("#A9A9A9"),
+                                        HexColor("#2F80ED") : i.last.toString() == "Cek Restan" ?
+                                        HexColor("#8BF59C") : HexColor("#A9A9A9"),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
+                                                        bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
+                                        ),
                                         child: Center(child: Column(
                                           children: <Widget>[
                                             Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
@@ -158,7 +163,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
 
   get content => Container(
     padding: const EdgeInsets.all(12.0),
-    margin: EdgeInsets.only(top: 100.0, left: 20.0,right: 20.0, bottom: 170.0),
+    margin: EdgeInsets.only(top: 100.0, left: 20.0,right: 20.0, bottom: 185.0),
     decoration: new BoxDecoration(
         color: HexColor("#F0F8FF"),
         borderRadius: new BorderRadius.only(
