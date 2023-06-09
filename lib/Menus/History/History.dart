@@ -43,7 +43,7 @@ class _HistoryState extends State<History>{
               child:
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 4.0, mainAxisSpacing: 6.0, crossAxisCount: 2),
+                  crossAxisSpacing: 4.0, mainAxisSpacing: 6.0, crossAxisCount: 3),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: _gridItem.length,
@@ -70,13 +70,13 @@ class _HistoryState extends State<History>{
                       ),
                       elevation: 5,
                       margin: EdgeInsets.only(left: 5, right: 5, bottom: 10),
-                      child: Center(child: Column(
-                        children: <Widget>[
-                          Expanded(child: Image.asset(_gridItem[index].image, height: 50,width: 50,)),
-                          Text(_gridItem[index].name, style:TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
-                          Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                        ],
-                      ),
+                        child: Center(child: Column(
+                          children: <Widget>[
+                            Expanded(child: Image.asset(_gridItem[index].image, height: 50,width: 50,)),
+                            Text(_gridItem[index].name, style:TextStyle(fontSize: 11, color: Colors.black, fontWeight: FontWeight.bold)),
+                            Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                          ],
+                        ),
                       ),
                     )
                   );

@@ -177,7 +177,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                 GridView.count(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  crossAxisCount: 2,
+                  crossAxisCount: 3,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 2.0,
                   children: [
@@ -199,7 +199,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
                             child: Center(child: Column(
                                 children: <Widget>[
                                   Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
-                                  Text(i.last, style:TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
+                                  Text(i.last, style:TextStyle(fontSize: 11, color: Colors.black, fontWeight: FontWeight.bold)),
                                   Padding(padding: EdgeInsets.only(bottom: 15.0)),
                                 ],
                               ),
