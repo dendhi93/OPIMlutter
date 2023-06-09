@@ -35,9 +35,9 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
     final double shortestSide = MediaQuery.of(context).size.shortestSide;
     final bool isSmallScreen = shortestSide < 500.0;
     return Scaffold(body: isSmallScreen ?
-        _initViewHome(context, true)
+    _initViewHome(context, true)
         : _initViewHome(context, false)
-    ,);
+      ,);
   }
 
   Widget _initViewHome(BuildContext context, bool isSmallScreen){
@@ -49,157 +49,172 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
   get dashBg => Column(
     children: <Widget>[
       Expanded(child: Container(
-          color: Colors.green,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/ic_tse_bg.png"),
-                fit: BoxFit.cover,
-              ),
+        color: Colors.green,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/ic_tse_bg.png"),
+              fit: BoxFit.cover,
             ),
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: Row(
+          ),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                  child: Column(
                     children: <Widget>[
-                      Expanded(child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: <Widget>[
-                          Container(
-                            padding: const EdgeInsets.only(left: 20.0, top: 30.0),
-                            child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 20.0, top: 7.0),
-                            child: Text(nameUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
-                          ),
-                        ],
-                      ),
-                      ),
-                      Expanded(child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          new Padding(padding: EdgeInsets.only(right: 40.0)),
-                          Column(
+                          Expanded(child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                padding: const EdgeInsets.only(right: 20.0, top: 30.0),
-                                child: Text('POP', style:TextStyle(fontSize: 18, color: Colors.white)),
+                                padding: const EdgeInsets.only(left: 20.0, top: 30.0),
+                                child: Text('Selamat Bekerja', style:TextStyle(fontSize: 18, color: Colors.white)),
                               ),
                               Container(
-                                padding: const EdgeInsets.only(right: 20.0, top: 7.0),
-                                child: Text(popUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                                padding: const EdgeInsets.only(left: 20.0, top: 7.0),
+                                child: Text(nameUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),
+                          ),
+                          Expanded(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              new Padding(padding: EdgeInsets.only(right: 40.0)),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    padding: const EdgeInsets.only(right: 20.0, top: 30.0),
+                                    child: Text('POP', style:TextStyle(fontSize: 18, color: Colors.white)),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.only(right: 20.0, top: 7.0),
+                                    child: Text(popUser, style:TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                          ),
                         ],
-                      )
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10.0, left: 22.0,right: 22.0, bottom: 17.0),
+                        child: Divider(color: Colors.white, height: 2),
                       ),
                     ],
-                  ),
-                ),
-
-                Container(
-                  margin: EdgeInsets.only(top: 0.0, left: 25.0,right: 25.0, bottom: 167.0),
-                  child: Divider(color: Colors.white, height: 2),
-                ),
-              ],
-            ),
+                  )
+              ),
+            ],
           ),
+        ),
       ),flex: 3,),
       Expanded(child: Container(
+        margin: EdgeInsets.only(left: 30.0,right: 30.0, bottom: 5.0),
+        alignment: Alignment.centerLeft,
+        color: Colors.white,
+      ),flex: 3,),
+    ],
+  );
+
+
+  get content => Column(
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(12.0),
+          margin: EdgeInsets.only(top: 100.0, left: 20.0,right: 20.0, bottom: 10.0),
+          decoration: new BoxDecoration(
+            color: HexColor("#F0F8FF"),
+            borderRadius: new BorderRadius.only(
+                topLeft:  const  Radius.circular(15.0),
+                topRight: const  Radius.circular(15.0),
+                bottomLeft:  const  Radius.circular(15.0),
+                bottomRight: const  Radius.circular(15.0)
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 1,
+                offset: Offset(2, 3),
+              )
+            ],
+          ),
+          child: Center(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Informasi', style:TextStyle(fontSize: 18, color: Colors.black)),
+                    Text('Informasi terbaru untukmu ada disini', style:TextStyle(fontSize: 15, color: Colors.black)),
+                    Padding(padding: EdgeInsets.only(top: 15.0)),
+                    listRestan,
+                    Padding(padding: EdgeInsets.only(top: 5.0)),
+                    listLastLogin,
+                    Padding(padding: EdgeInsets.only(top: 5.0)),
+                    listLastUploaded,
+                    Padding(padding: EdgeInsets.only(top: 5.0)),
+                    listLastSync
+                  ],
+                ),
+              )
+          ),
+        ),
+        Expanded(child: Container(
           margin: EdgeInsets.only(left: 30.0,right: 30.0, bottom: 5.0),
           alignment: Alignment.centerLeft,
           color: Colors.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 150.0)),
-              Text('Pilih Menu', style:TextStyle(fontSize: 18, color: Colors.black)),
+              Text('Pilih Menu', style:TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
               Expanded(child:
-                    Container(child:
-                        GridView.count(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 4.0,
-                          mainAxisSpacing: 6.0,
-                          children: [
-                            ...menus.map((i) =>
-                                GestureDetector(
-                                  onTap: (){
-                                    _opimUtils.toastMessage("tekan " +i.last.toString());
-                                  },
-                                  child: Card(
-                                        color:  i.last.toString() == "Cek Hasil Panen" ?
-                                        HexColor("#2F80ED") : i.last.toString() == "Cek Restan" ?
-                                        HexColor("#8BF59C") : HexColor("#A9A9A9"),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
-                                                        bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
-                                        ),
-                                        child: Center(child: Column(
-                                          children: <Widget>[
-                                            Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
-                                            Text(i.last, style:TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
-                                            Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                                          ],
-                                         ),
-                                        ),
-                                  ),
-                                )
-                            )
-                          ],
-                        ),
-                    ),flex:1,
+              Container(
+                child:
+                GridView.count(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 2.0,
+                  children: [
+                    ...menus.map((i) =>
+                        GestureDetector(
+                          onTap: (){
+                            _opimUtils.toastMessage("tekan " +i.last.toString());
+                          },
+                          child: Card(
+                            color:  i.last.toString() == "Cek Hasil Panen" ?
+                            HexColor("#2F80ED") : i.last.toString() == "Cek Restan" ?
+                            HexColor("#8BF59C") : HexColor("#A9A9A9"),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
+                                    bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
+                            ),
+                            elevation: 5,
+                            margin: EdgeInsets.only(left: 5, right: 5, bottom: 15),
+                            child: Center(child: Column(
+                                children: <Widget>[
+                                  Expanded(child: Image.asset(i.first, height: 50,width: 50,)),
+                                  Text(i.last, style:TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
+                                  Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                    )
+                  ],
+                ),
+              ),flex:2,
               ),
             ],
           ),
-      ),flex: 3,),
-    ],
-  );
-
-  get content => Container(
-    padding: const EdgeInsets.all(12.0),
-    margin: EdgeInsets.only(top: 100.0, left: 20.0,right: 20.0, bottom: 185.0),
-    decoration: new BoxDecoration(
-        color: HexColor("#F0F8FF"),
-        borderRadius: new BorderRadius.only(
-            topLeft:  const  Radius.circular(15.0),
-            topRight: const  Radius.circular(15.0),
-            bottomLeft:  const  Radius.circular(15.0),
-            bottomRight: const  Radius.circular(15.0)
-        ),
-      boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 1,
-            offset: Offset(2, 3),
-          )
-      ],
-    ),
-    child: Center(
-        child: Container(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('Informasi', style:TextStyle(fontSize: 18, color: Colors.black)),
-              Text('Informasi terbaru untukmu ada disini', style:TextStyle(fontSize: 15, color: Colors.black)),
-              Padding(padding: EdgeInsets.only(top: 15.0)),
-              listRestan,
-              Padding(padding: EdgeInsets.only(top: 5.0)),
-              listLastLogin,
-              Padding(padding: EdgeInsets.only(top: 5.0)),
-              listLastUploaded,
-              Padding(padding: EdgeInsets.only(top: 5.0)),
-              listLastSync
-            ],
-          ),
-        )
-    ),
+        ),flex: 1,),
+      ]
   );
 
   get listRestan => Container(
@@ -410,12 +425,12 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
             mUser.lastSync, ConstantsVar.slashDateTimeFormat) : "";
         qtyTph = "5 TPH belum di cek";
         if(mUser != null && mUser.roleCode == "CHECKER_PANEN") {
-            menus = [
-              ["assets/images/ic_panen.png", "Cek Hasil Panen"],
-              ["assets/images/ic_restan.png", "Cek Restan"],
-              ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
-              ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
-            ];
+          menus = [
+            ["assets/images/ic_panen.png", "Cek Hasil Panen"],
+            ["assets/images/ic_restan.png", "Cek Restan"],
+            ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
+            ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
+          ];
         }
       });
     }

@@ -38,10 +38,12 @@ class _HistoryState extends State<History>{
               padding: const EdgeInsets.only(left: 10.0, top: 3.0),
               child: Text("Pilih menu yang akan dikerjakan", style:TextStyle(fontSize: 13, color: Colors.grey)),
             ),
-            Expanded(child: Container(child:
+            Expanded(child: Container(
+              padding: const EdgeInsets.only(top: 12),
+              child:
             GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
+                  crossAxisSpacing: 4.0, mainAxisSpacing: 6.0, crossAxisCount: 2),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: _gridItem.length,
@@ -60,20 +62,22 @@ class _HistoryState extends State<History>{
                     },
                     child: Card(
                       color: _gridItem[index].name == "Riwayat Hasil Panen"
-                            ? HexColor("#2F80ED") : _gridItem[index].name == "Riwayat Restan"?
-                            HexColor("#8BF59C") : HexColor("#A9A9A9"),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
-                            ),
-                            child: Center(child: Column(
-                              children: <Widget>[
-                                Expanded(child: Image.asset(_gridItem[index].image, height: 50,width: 50,)),
-                                Text(_gridItem[index].name, style:TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
-                                Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                              ],
-                            ),
-                            ),
+                          ? HexColor("#2F80ED") : _gridItem[index].name == "Riwayat Restan"?
+                      HexColor("#8BF59C") : HexColor("#A9A9A9"),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
+                              bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.only(left: 5, right: 5, bottom: 10),
+                      child: Center(child: Column(
+                        children: <Widget>[
+                          Expanded(child: Image.asset(_gridItem[index].image, height: 50,width: 50,)),
+                          Text(_gridItem[index].name, style:TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
+                          Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                        ],
+                      ),
+                      ),
                     )
                   );
                 },
