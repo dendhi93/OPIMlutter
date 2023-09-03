@@ -73,7 +73,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
                               ),
                             ),
                             validator: (val) {
-                              if(val.length==0) {return "Nik cannot be empty";
+                              if(val.toString().isEmpty) {return "Nik cannot be empty";
                               }else{return null;}
                             },
                             keyboardType: TextInputType.text,
@@ -103,7 +103,7 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
                               ),
                             ),
                             validator: (val) {
-                              if(val.length==0) {return "password cannot be empty";
+                              if(val.toString().isEmpty) {return "password cannot be empty";
                               }else{return null;}
                             },
                             obscureText: _obscureText,
@@ -124,8 +124,10 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
                               side: BorderSide(color: Colors.green)
                           ),
                           onPressed: () {
-                            if (_formKey.currentState.validate()){
+                            if(_formKey.currentState != null){
+                              if (_formKey.currentState.validate()){
                                 _loginPresenter.validateConn(context,etLoginNik.text.trim(), etLoginPass.text.trim());
+                              }
                             }
                           },
                           child: Text(
@@ -162,8 +164,10 @@ class _LoginState extends State<Login> implements LoginInterfaceView{
 
   @override
   void loadingBar(int typeLoading) {
-    typeLoading == ConstantsVar.showLoadingBar ? OpimUtils.showLoadingDialog(context,_keyLoader, ConstantsVar.loadingMessage)
-        : Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
+    if(_keyLoader.currentContext != null){
+      typeLoading == ConstantsVar.showLoadingBar ? OpimUtils.showLoadingDialog(context,_keyLoader, ConstantsVar.loadingMessage)
+          : Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
+    }
   }
 
   @override
