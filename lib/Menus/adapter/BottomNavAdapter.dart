@@ -4,7 +4,6 @@ import 'package:opim_flutter/Menus/Account/view/Account.dart';
 import 'package:opim_flutter/Menus/History/History.dart';
 import 'package:opim_flutter/Menus/Home/view/Home.dart';
 import 'package:opim_flutter/Utils/OpimUtils.dart';
-import 'package:opim_flutter/main.dart';
 
 class BottomNavAdapter extends StatefulWidget {
   @override
@@ -45,8 +44,7 @@ class _BottomNavAdapterState extends State<BottomNavAdapter>{
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime) > Duration(seconds: 3)) {
+    if (now.difference(currentBackPressTime) > Duration(seconds: 3)) {
       currentBackPressTime = now;
       _opimUtils.toastMessage("please tap again to exit");
       return Future.value(false);

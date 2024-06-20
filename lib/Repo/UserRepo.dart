@@ -13,23 +13,21 @@ class UserRepo{
   }
 
   void insertUser(MUser user) async{
-    if(_appDatabase != null){
-      await _appDatabase.userDAO.deleteAllUser();
-      await _appDatabase.userDAO.insertUser(user);
+    await _appDatabase.userDAO.deleteAllUser();
+    await _appDatabase.userDAO.insertUser(user);
     }
-  }
 
   Future<String> validateUserToken() async {
     String token = "";
     database.then((onValueDb) async {
       _appDatabase = onValueDb;
        await onValueDb.userDAO.findAllUser().then((onValueQuery) => {
-        if(onValueQuery != null){
-          if(onValueQuery.length > 0){
-            token = onValueQuery[0].userToken,
-            print("token 1 " + token),
-          }
+        {
+        if(onValueQuery.length > 0){
+          token = onValueQuery[0].userToken,
+          print("token 1 " + token),
         }
+      }
       });
     });
     return token;
@@ -37,13 +35,11 @@ class UserRepo{
 
   Future<int> getMaxUser() async{
     int maxId = 0;
-    if(_appDatabase != null){
-      _appDatabase.userDAO.getMaxUser().then((onValueMax) => {
-        if(onValueMax != null){
-          maxId = onValueMax.id + 1
-        }
-      });
+    _appDatabase.userDAO.getMaxUser().then((onValueMax) => {
+      {
+      maxId = onValueMax.id + 1
     }
-    return maxId;
+    });
+      return maxId;
   }
 }

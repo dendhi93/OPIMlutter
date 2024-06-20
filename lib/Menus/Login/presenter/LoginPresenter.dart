@@ -39,12 +39,12 @@ class LoginPresenter implements LoginInterfaceImpl, HideLoadingBar{
     _userRepo.initUserRepo();
     database.then((onValueDb) {
       onValueDb.userDAO.findAllUser().then((onValueQuery) => {
-          if(onValueQuery != null){
-            if(onValueQuery.length > 0){
-              userToken = onValueQuery[0].userToken,
-              if(userToken != "")view?.directToHome(),
-            }
+          {
+          if(onValueQuery.length > 0){
+            userToken = onValueQuery[0].userToken,
+            if(userToken != "")view.directToHome(),
           }
+        }
       });
     });
   }
@@ -52,7 +52,7 @@ class LoginPresenter implements LoginInterfaceImpl, HideLoadingBar{
   @override
   void submitLogin(String un, String pwd) {
     //todo request api
-    view?.loadingBar(ConstantsVar.showLoadingBar);
+    view.loadingBar(ConstantsVar.showLoadingBar);
     try{
       String firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, nikUser;
       String popName, division, imei, lastUpload, lastSync, companyCode, passwordUser;
@@ -81,7 +81,7 @@ class LoginPresenter implements LoginInterfaceImpl, HideLoadingBar{
 
             database.then((onValueDB) {
               onValueDB.userDAO.getMaxUser().then((onValueMax) => {
-                if(onValueMax != null){maxId = onValueMax.id + 1}
+                {maxId = onValueMax.id + 1}
               });
               mUser = MUser(maxId, nikUser,firstName, lastName, roleName, roleCode, lastLoggedIn, registrationDate, popId, popName, division, imei, lastUpload, lastSync, true, userToken, companyCode, passwordUser);
               _userRepo.insertUser(mUser);
@@ -89,23 +89,23 @@ class LoginPresenter implements LoginInterfaceImpl, HideLoadingBar{
               getAllMaster();
             }),
         }else if(responseLoginStatus == ConstantsVar.failedStatusCode){
-          view?.loadingBar(ConstantsVar.hideLoadingBar),
-          view?.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
+          view.loadingBar(ConstantsVar.hideLoadingBar),
+          view.messageLogin(ResponseLoginModel.fromJson(jsonDecode(value)).message)
         }else if(responseLoginStatus == ConstantsVar.errorStatusCode){
-          view?.loadingBar(ConstantsVar.hideLoadingBar),
-          view?.messageLogin(ConstantsVar.errorStatusMessage)
+          view.loadingBar(ConstantsVar.hideLoadingBar),
+          view.messageLogin(ConstantsVar.errorStatusMessage)
         },
       });
     }catch(error){
-      view?.loadingBar(ConstantsVar.hideLoadingBar);
-      view?.messageLogin("error Login $error");
+      view.loadingBar(ConstantsVar.hideLoadingBar);
+      view.messageLogin("error Login $error");
     }
   }
 
   @override
   void validateConn(BuildContext context, String un, String pwd) {
     OpimUtils.checkConnection().then((isConnected) => {
-      isConnected ? submitLogin(un, pwd) : view?.onAlertDialog(ConstantsVar.noConnectionTitle, ConstantsVar.noConnectionMessage, context)
+      isConnected ? submitLogin(un, pwd) : view.onAlertDialog(ConstantsVar.noConnectionTitle, ConstantsVar.noConnectionMessage, context)
     });
   }
 
@@ -129,41 +129,41 @@ class LoginPresenter implements LoginInterfaceImpl, HideLoadingBar{
         listResponseAncak = ResponseMasterData.fromJson(jsonDecode(value)).data.ancak,
         listResponseTph = ResponseMasterData.fromJson(jsonDecode(value)).data.tph,
 
-        if(listResponseBlock != null){
-          for(final block in listResponseBlock){
-            mBlock = MBlock(block.blockid, block.refDivisiId.toString(), block.blokdescname, block.divisicode, block.companycode, block.popcode, block.blockcode),
-            _masterRepo.insertBlock(mBlock)
-          },
+        {
+        for(final block in listResponseBlock){
+          mBlock = MBlock(block.blockid, block.refDivisiId.toString(), block.blokdescname, block.divisicode, block.companycode, block.popcode, block.blockcode),
+          _masterRepo.insertBlock(mBlock)
         },
+      },
 
-        if(listResponseDivision != null){
-            for(final division in listResponseDivision){
-                mDivisi = MDivisi(division.divisiId, division.divisiDescname, division.divisicode, division.refPopcode),
-                _masterRepo.insertDivision(mDivisi)
-            }
-          },
-
-        if(listResponseAncak != null){
-          for(final ancak in listResponseAncak){
-            mAncak = MAncak(ancak.ancakid, ancak.refBlockid.toString(), ancak.ancakDescname, ancak.blockcode, ancak.popcode, ancak.divisicode, ancak.ancakcode),
-            _masterRepo.insertAncak(mAncak)
+        {
+          for(final division in listResponseDivision){
+              mDivisi = MDivisi(division.divisiId, division.divisiDescname, division.divisicode, division.refPopcode),
+              _masterRepo.insertDivision(mDivisi)
           }
         },
 
-        if(listResponseTph != null){
-          for(final tph in listResponseTph){
-            mTph = MTph(tph.tphId, tph.refAncakid.toString(), tph.tphDescname, tph.longitude, tph.latitude, tph.ancakcode, tph.popcode, tph.divisicode, tph.tphcode, tph.blockcode, tph.tphIntegrityCode),
-            _masterRepo.insertTph(mTph)
-          }
-        },
+        {
+        for(final ancak in listResponseAncak){
+          mAncak = MAncak(ancak.ancakid, ancak.refBlockid.toString(), ancak.ancakDescname, ancak.blockcode, ancak.popcode, ancak.divisicode, ancak.ancakcode),
+          _masterRepo.insertAncak(mAncak)
+        }
+      },
+
+        {
+        for(final tph in listResponseTph){
+          mTph = MTph(tph.tphId, tph.refAncakid.toString(), tph.tphDescname, tph.longitude, tph.latitude, tph.ancakcode, tph.popcode, tph.divisicode, tph.tphcode, tph.blockcode, tph.tphIntegrityCode),
+          _masterRepo.insertTph(mTph)
+        }
+      },
         await new Future.delayed(const Duration(seconds: 5), () {
-          view?.goToHome();
+          view.goToHome();
         }),
       }
     });
   }
 
   @override
-  void closeBar() {view?.loadingBar(ConstantsVar.hideLoadingBar);}
+  void closeBar() {view.loadingBar(ConstantsVar.hideLoadingBar);}
 
 }

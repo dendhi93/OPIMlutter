@@ -21,7 +21,7 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
   String lastSync = "";
   List menus = [];
   OpimUtils _opimUtils = OpimUtils();
-  HomePresenter _homePresenter;
+  late HomePresenter _homePresenter;
 
   @override
   void initState() {
@@ -412,29 +412,27 @@ class _HomeState extends State<Home> implements HomeInterfaceView{
 
   @override
   void resultView(MUser mUser) {
-    if(mUser != null){
-      setState(() {
-        nameUser = mUser != null ?
-        mUser.firstName + " " +mUser.lastName : "" ;
-        popUser = mUser != null ? mUser.pop : "" ;
-        lastLogin = mUser != null ? _opimUtils.dateChangeFormat(
-            mUser.lastLoggedIn, ConstantsVar.slashDateTimeFormat) : "";
-        lastUploaded = mUser != null ? _opimUtils.dateChangeFormat(
-            mUser.lastUpload, ConstantsVar.slashDateTimeFormat) : "";
-        lastSync = mUser != null ? _opimUtils.dateChangeFormat(
-            mUser.lastSync, ConstantsVar.slashDateTimeFormat) : "";
-        qtyTph = "5 TPH belum di cek";
-        if(mUser != null && mUser.roleCode == "CHECKER_PANEN") {
-          menus = [
-            ["assets/images/ic_panen.png", "Cek Hasil Panen"],
-            ["assets/images/ic_restan.png", "Cek Restan"],
-            ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
-            ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
-          ];
-        }
-      });
+    setState(() {
+      nameUser = mUser != null ?
+      mUser.firstName + " " +mUser.lastName : "" ;
+      popUser = mUser != null ? mUser.pop : "" ;
+      lastLogin = mUser != null ? _opimUtils.dateChangeFormat(
+          mUser.lastLoggedIn, ConstantsVar.slashDateTimeFormat) : "";
+      lastUploaded = mUser != null ? _opimUtils.dateChangeFormat(
+          mUser.lastUpload, ConstantsVar.slashDateTimeFormat) : "";
+      lastSync = mUser != null ? _opimUtils.dateChangeFormat(
+          mUser.lastSync, ConstantsVar.slashDateTimeFormat) : "";
+      qtyTph = "5 TPH belum di cek";
+      if(mUser.roleCode == "CHECKER_PANEN") {
+        menus = [
+          ["assets/images/ic_panen.png", "Cek Hasil Panen"],
+          ["assets/images/ic_restan.png", "Cek Restan"],
+          ["assets/images/ic_street.png", "Lapor Kondisi Jalan"],
+          ["assets/images/ic_street.png", "Lapor Kondisi Blok"],
+        ];
+      }
+    });
     }
-  }
 }
 
 

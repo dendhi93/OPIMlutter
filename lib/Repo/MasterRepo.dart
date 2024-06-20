@@ -17,26 +17,18 @@ class MasterRepo{
   }
 
   void insertBlock(MBlock block) async{
-    if(_appDatabase != null){
-      await _appDatabase.blockDAO.insertBlock(block);
+    await _appDatabase.blockDAO.insertBlock(block);
     }
-  }
 
   void insertDivision(MDivisi division) async{
-    if(_appDatabase != null){
-      await _appDatabase.divisiDAO.insertDivisi(division);
+    await _appDatabase.divisiDAO.insertDivisi(division);
     }
-  }
 
   void insertAncak(MAncak ancak) async{
-    if(_appDatabase != null){
-      await _appDatabase.ancakDAO.insertAncak(ancak);
+    await _appDatabase.ancakDAO.insertAncak(ancak);
     }
-  }
 
   void insertTph(MTph tph) async {
-    if(_appDatabase != null){
-      await _appDatabase.tphDAO.insertTph(tph);
+    await _appDatabase.tphDAO.insertTph(tph);
     }
-  }
 }

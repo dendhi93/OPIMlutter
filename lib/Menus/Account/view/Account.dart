@@ -221,19 +221,17 @@ class _AccountState extends State<Account> implements AccountInterfaceView, Dial
 
   @override
   void resultUserView(MUser mUser) {
-    if(mUser != null){
-      setState(() {
-        userRole = mUser.roleName;
-        nameUser = mUser.firstName + " " + mUser.lastName;
-        nikUser = "Kode Pengguna : " +mUser.nik;
-        popUser = mUser.pop;
-        divisionUser = mUser.division;
-        lastLoginUser = _opimUtils.dateChangeFormat(mUser.lastLoggedIn, ConstantsVar.slashDateTimeFormat);
-        registeredDateUser = _opimUtils.dateChangeFormat(mUser.registrationDate, ConstantsVar.slashDateFormat);
-        imeiUser = mUser.imei;
-      });
+    setState(() {
+      userRole = mUser.roleName;
+      nameUser = mUser.firstName + " " + mUser.lastName;
+      nikUser = "Kode Pengguna : " +mUser.nik;
+      popUser = mUser.pop;
+      divisionUser = mUser.division;
+      lastLoginUser = _opimUtils.dateChangeFormat(mUser.lastLoggedIn, ConstantsVar.slashDateTimeFormat);
+      registeredDateUser = _opimUtils.dateChangeFormat(mUser.registrationDate, ConstantsVar.slashDateFormat);
+      imeiUser = mUser.imei;
+    });
     }
-  }
 
   @override
   void resultVersion(String version) {

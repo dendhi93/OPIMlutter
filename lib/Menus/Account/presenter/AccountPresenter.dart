@@ -16,10 +16,10 @@ class AccountPresenter implements AccountInterfaceImpl{
     initPackageInfo();
     database.then((onValueDb) => {
       onValueDb.userDAO.findAllUser().then((valueQuery) => {
-        if(valueQuery != null){
-          _accountView?.resultUserView(valueQuery[valueQuery.length - 1]),
-          idUser = valueQuery[valueQuery.length - 1].id,
-        }
+        {
+        _accountView.resultUserView(valueQuery[valueQuery.length - 1]),
+        idUser = valueQuery[valueQuery.length - 1].id,
+      }
       })
     });
   }

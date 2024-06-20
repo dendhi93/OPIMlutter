@@ -1,4 +1,3 @@
-import 'package:opim_flutter/Utils/OpimUtils.dart';
 
 import '../../../Model/database/entity/MUser.dart';
 

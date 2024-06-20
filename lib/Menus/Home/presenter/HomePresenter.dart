@@ -15,9 +15,9 @@ class HomePresenter implements HomeInterfaceImpl{
   void initViewData() {
     database.then((onValueDb) async => {
         await onValueDb.userDAO.findAllUser().then((valueQuery) => {
-            if(valueQuery != null){
-              homeView?.resultView(valueQuery[valueQuery.length - 1]),
-            }
+            {
+            homeView.resultView(valueQuery[valueQuery.length - 1]),
+          }
         })
     });
   }

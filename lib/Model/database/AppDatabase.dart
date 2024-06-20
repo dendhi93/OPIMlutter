@@ -8,7 +8,6 @@ import 'package:opim_flutter/Model/database/dao/MTphDao.dart';
 import 'package:opim_flutter/Model/database/dao/MUserDao.dart';
 import 'package:opim_flutter/Model/database/entity/Mdivisi.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
-import 'package:path/path.dart';
 import 'entity/MAncak.dart';
 import 'entity/MBlock.dart';
 import 'entity/MTph.dart';

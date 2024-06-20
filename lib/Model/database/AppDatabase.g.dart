@@ -78,13 +78,13 @@ class _$AppDatabase extends AppDatabase {
         await database.execute('PRAGMA foreign_keys = ON');
       },
       onOpen: (database) async {
-        await callback?.onOpen?.call(database);
+        await callback.onOpen?.call(database);
       },
       onUpgrade: (database, startVersion, endVersion) async {
         await MigrationAdapter.runMigrations(
             database, startVersion, endVersion, migrations);
 
-        await callback?.onUpgrade?.call(database, startVersion, endVersion);
+        await callback.onUpgrade?.call(database, startVersion, endVersion);
       },
       onCreate: (database, version) async {
         await database.execute(
@@ -98,7 +98,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `MTph` (`tphId` INTEGER PRIMARY KEY AUTOINCREMENT, `ancakId` TEXT, `tphName` TEXT, `longitude` TEXT, `latitude` TEXT, `ancakCode` TEXT, `popCode` TEXT, `divisionCode` TEXT, `tphCode` TEXT, `blockCode` TEXT, `tphIntegrityCode` TEXT)');
 
-        await callback?.onCreate?.call(database, version);
+        await callback.onCreate?.call(database, version);
       },
     );
     return sqfliteDatabaseFactory.openDatabase(path, options: databaseOptions);
